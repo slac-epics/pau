@@ -1,0 +1,67 @@
+EPICS database descriptions
+----------------------------
+
+
+drvPau.db; PAU operation control and monitoring
+drvPauPauBeamcodeTimslot.db; Beam code and Time slot for the pattern matching
+drvPauPattern.db; exclusion masks and inclusion mask for the pattern matching
+dbMux.db; MUX operation control and monitoring
+dbMuxDataSlot.db; data slots in the MUX
+dbMuxOffset.db; Master set value and offsets for each data slots
+
+
+Macro descrtiptions
+-------------------
+
+dbPau.template; Template for the PAU object
+$(PAU_REC): PAU PV name
+$(PAU): PAU name
+dbMux.template; Template for the MUX object
+$(MUX_REC): Record name for the MUX
+
+
+
+Add up the following lines in your Makefile in Db directory.
+-----------------------------------------------------------
+
+DB_INSTALLS += $(PAU)/db/dbPau.db
+DB_INSTALLS += $(PAU)/db/dbPauBeamcodeTimeslot.db
+DB_INSTALLS+=$(PAU)/db/dbPauPattern.db
+DB_INSTALLS+=$(PAU)/db/dbMux.db
+DB_INSTALLS+=$(PAU)/db/dbMuxDataSlot.db
+DB_INSTALLS+=$(PAU)/db/dbMuxOffset.db
+
+DB_INSTALLS+=$(PAU)/db/dbPau.template
+DB_INSTALLS+=$(PAU)/db/dbMux.template
+
+
+How to use the templates to create PAU records and Muxes
+---------------------------------------------------------
+
+Make your DB substitution file in the Db directory.
+
+Example) 
+myPau.substitution
+
+file dbPau.template {
+   pattern {   PAU_REC,    PAU }
+            {  "PAU:RF0:0", pau0 }
+            {  "PAU:RF0:1", pau1 }
+            {  "PAU:RF0:2", pau2 }
+            {  "PAU:RF0:3", pau3 }
+            {  "PAU:RF0:4", pau4 }
+}
+
+file dbMux.template {
+    pattern {   MUX_REC  }
+            { "ACCL:IN20:400:ADES" }
+}
+
+
+Add up the following line in your Makefile.
+
+DB += myPau.db
+
+
+
+

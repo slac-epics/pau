@@ -1,0 +1,168 @@
+record(ai, "$(PAU_REC):FIDCNT")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "Passive")
+    field(INP, "@getFidCnt $(PAU)")
+    field(DESC, "fiducial cnt for $(PAU)")
+    field(EGU, "Counts")
+    field(PREC, "0")
+}
+
+record(calc, "$(PAU_REC):FIDRATE")
+{
+    field(SCAN, "2 second")
+    field(CALC, "(C-B)<0.?A:(C-B)/2.")
+    field(INPA, "$(PAU_REC):FIDRATE.VAL NPP NMS")
+    field(INPB, "$(PAU_REC):FIDCNT.VAL NPP NMS")
+    field(INPC, "$(PAU_REC):FIDCNT.VAL PP NMS")
+    field(DESC, "fiducial rate for $(PAU)")
+    field(PREC, "2")
+}
+
+record(ai, "$(PAU_REC):CBCNT")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "Passive")
+    field(INP, "@getCbCnt $(PAU)")
+    field(DESC, "callback cnt for $(PAU)")
+    field(EGU, "Counts")
+    field(PREC,"0")
+}
+
+record(calc, "$(PAU_REC):CBRATE")
+{
+    field(SCAN, "2 second")
+    field(CALC, "(C-B)<0.?A:(C-B)/2.")
+    field(INPA, "$(PAU_REC):CBRATE.VAL NPP NMS")
+    field(INPB, "$(PAU_REC):CBCNT.VAL NPP NMS")
+    field(INPC, "$(PAU_REC):CBCNT.VAL PP NMS")
+    field(DESC, "callback rate for $(PAU)")
+    field(PREC, "2")
+}
+
+record(ai, "$(PAU_REC):DLYISR")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getDlyIsr $(PAU)")
+    field(DESC, "timer isr delay for $(PAU)")
+    field(EGU, "micro-sec")
+    field(PREC, "3")
+}
+
+record(ai, "$(PAU_REC):DLYPULL")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getDlyPull $(PAU)")
+    field(DESC, "pull function delay for $(PAU)")
+    field(EGU, "micro-sec")
+    field(PREC, "3")
+}
+
+record(ai, "$(PAU_REC):DLYPUSH")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getDlyPush $(PAU)")
+    field(DESC, "push function delay for $(PAU)")
+    field(EGU, "micro-sec")
+    field(PREC, "3")
+}
+
+record(ai, "$(PAU_REC):DLYDIAG")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getDlyDiag $(PAU)")
+    field(DESC, "diag function delay for $(PAU)")
+    field(EGU, "micro-sec")
+    field(PREC, "3")
+}
+
+record(ai, "$(PAU_REC):SPNFID")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getSpnFid $(PAU)")
+    field(DESC, "spintime for fid for $(PAU)")
+    field(EGU, "micro-sec")
+    field(PREC, "3")
+}
+
+record(ai, "$(PAU_REC):SPNDIAG")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getSpnDiag $(PAU)")
+    field(DESC, "spintime for diag for $(PAU)")
+    field(EGU, "micro-sec")
+    field(PREC, "3")
+}
+
+record(bo, "$(PAU_REC):ACTPAU")
+{
+    field(DTYP, "PAU")
+    field(OUT, "@setActivatePau $(PAU)")
+    field(DESC, "Activate PAU for $(PAU)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(VAL, "1")
+}
+
+record(bo, "$(PAU_REC):ACTPULL")
+{
+    field(DTYP, "PAU")
+    field(OUT, "@setActivateUsrPull $(PAU)")
+    field(DESC, "Activate Pull func for $(PAU)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(VAL, "1")
+}
+
+record(bo, "$(PAU_REC):ACTPUSH")
+{
+    field(DTYP, "PAU")
+    field(OUT, "@setActivateUsrPush $(PAU)")
+    field(DESC, "Activate Push func for $(PAU)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(VAL, "1")
+}
+
+record(bo, "$(PAU_REC):ACTDIAG")
+{
+    field(DTYP, "PAU")
+    field(OUT, "@setActivateDiag $(PAU)")
+    field(DESC, "Activate Diag for $(PAU)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(VAL, "1")
+}
+
+record(bo, "$(PAU_REC):FBCK")
+{
+    field(DTYP, "PAU")
+    field(OUT, "@setFeedbackMode $(PAU)")
+    field(DESC, "Feedback mode for $(PAU)")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(VAL, "1")
+}
+
+record(ao, "$(PAU_REC):PIPEIDX")
+{
+    field(DTYP, "PAU")
+    field(OUT, "@setPipIdx $(PAU)")
+    field(DESC, "EVR pipeline index for $(PAU)")
+    field(PREC, "0")
+}
+
+record(ao, "$(PAU_REC):DELAY")
+{
+    field(DTYP, "PAU")
+    field(OUT, "@setDelay $(PAU)")
+    field(DESC, "Timer delay for $(PAU)")
+    field(EGU, "micro-sec")
+    field(PREC, "3")
+}

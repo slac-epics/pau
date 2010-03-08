@@ -1,0 +1,27 @@
+record(ai, "$(MUX_REC):GETFCOM_$(DS)")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getfcomData ds$(DS)")
+    field(DESC, "fcomData reading")
+    field(PREC, "3")
+}
+
+record(ai, "$(MUX_REC):GETDATA_$(DS)")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getstaticData ds$(DS)")
+    field(DESC, "static data reading")
+    field(PREC, "3")
+}
+
+record(ao, "$(MUX_REC):SETDATA_$(DS)")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "Passive")
+    field(OUT, "@setstaticData ds$(DS)")
+    field(DESC, "static data setting")
+    field(PREC, "3")
+}
+

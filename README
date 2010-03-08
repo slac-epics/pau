@@ -1,0 +1,339 @@
+Instruction for the PAU users		Last Updated 01/22/2010
+-----------------------------           ------------------------
+
+
+Adding the drvPau package to your IOC application:
+(1)	Add  PAU and RESTORE or AUTOSAVE to configure/RELEASE and clean/rebuild configure. 
+Note that the drvPau requires the EVENT package.
+
+(2)	Add up, the followings in the xxxApp/configure/RELEASE 
+ 
+PAU_MODULE_VERSION = Development 
+PAU = $(EPICS_MODULES)/pau/$(PAU_MODULE_VERSION) 
+
+(3)	Link PAU libraries into your application by adding to xxxApp/src/Makefile: 
+xxx_LIBS += pau
+
+(4)	Add the following .dbd fioles to xxxApp/src/Makefile or to xxxApp/src/xxxInclude.dbd: 
+xxx_DBD += drvPau.dbd 
+xxx_DBD += devPau.dbd 
+xxx_DBD += drvPauUsr.dbd 
+
+(5)	Add the PAU database to your application. For an example, see: 
+pau/<release>/src/Db/README 
+ 
+NOTES) 
+ drvPau.db; PAU operation control and monitoring 
+drvPauPauBeamcodeTimslot.db; Beam code and Time slot for the pattern matching 
+drvPauPattern.db; exclusion masks and inclusion mask for the pattern matching 
+dbMux.db; MUX operation control and monitoring 
+dbMuxDataSlot.db; data slots in the MUX 
+dbMuxOffset.db; Master set value and offsets for each data slots 
+dbPau.template; Template for the PAU object 
+$(PAU_REC): PAU PV name 
+$(PAU): PAU name 
+dbMux.template; Template for the MUX object 
+$(ATTR): Attribute for the MUX 
+$(MSTR): Pre-fix for the master set value  
+ 
+Add up the following lines in your Makefile in Db directory. 
+ 
+DB_INSTALLS += $(PAU)/db/dbPau.db 
+DB_INSTALLS += $(PAU)/db/dbPauBeamcodeTimeslot.db 
+DB_INSTALLS+=$(PAU)/db/dbPauPattern.db 
+DB_INSTALLS+=$(PAU)/db/dbMux.db 
+DB_INSTALLS+=$(PAU)/db/dbMuxDataSlot.db 
+DB_INSTALLS+=$(PAU)/db/dbMuxOffset.db 
+ 
+DB_INSTALLS+=$(PAU)/db/dbPau.template 
+DB_INSTALLS+=$(PAU)/db/dbMux.template 
+ 
+
+(6)	Add  the data substitutions for the drvPau. For an example, see: 
+pau/<release>/src/Db/README 
+use dbPau.template and dbMux.template with the macros which are described previous. 
+ 
+Make your DB substitution file in the Db directory. 
+ 
+Example)  
+myPau.substitution 
+ 
+file dbPau.template {
+   pattern {   PAU_REC,    PAU }
+            {  "PAU:RF0:0", pau0 }
+            {  "PAU:RF0:1", pau1 }
+            {  "PAU:RF0:2", pau2 }
+            {  "PAU:RF0:3", pau3 }
+            {  "PAU:RF0:4", pau4 }
+}
+
+file dbMux.template {
+    pattern {   ATTR,          MSTR   }
+            { "ATTRIB:PAU0:0", "VAL" }
+}
+ 
+Add up the following line in your Makefile. 
+ 
+DB += myPau.db 
+ 
+
+ 
+
+How can you use the example Displays for the PAU and MUX
+The Pau package provides two edm screen examples: pau.edl and mux.edl. You can bring it up with 
+the following MACROS. 
+Please check up pau/<release>/pauApp/srcDisplay/README.
+-----------	--------------			------------------------------------------------------ 
+EDL file		MACRO				Description 
+-----------	--------------			------------------------------------------------------ 
+pau.edl		PAU_REC			PAU control and monitoring screen 
+mux.edl		ATTR				MUX monitoring, set  data slots
+
+Command line interface for the drvPau
+
+How to create the PAU:
+To use the drvPau software, you need to create the PAU object with the following command on the 
+target shell.
+	createPau(<pau name>, pipeline index, <description>)
+The <pau name> is a string identifier to assign a name to the PAU. The pipeline index will be used for 
+the advanced pattern matching. We assume that the default value for the pipeline index is 2. The 
+<description> is a optional string to make a short description for the PAU. You can see the description 
+string in some report messages for the PAU.
+There is no limit the number of PAUs but, the PAU object uses the hardware watchdog timer on the 
+CPU board. In our case: MVME6100 has 4 watchdog timers on the board. Thus, if you need to use the 
+watchdog timer for the PAU, you can use only 4 PAUs.
+When you create the PAU, the PAU has 500usec delay timer setting as a default. If you want to adjust 
+it, you can adjust it with some of PV for the PAU.
+
+How to create the MUX:
+After, creating the PAU. You also need to create MUX with the following command on the target shell.
+createMux(<pau name>, <attribute>,  
+                      <name of the push function>, <name of the pull function>, <description>)
+The <pau name> is a string identifier, it describes which PAU is owner of the MUX. Thus, you have to 
+have a valid PAU when you create the MUX. The <attribute> describes the attribute of the MUX. The 
+attribute name also will be used for the PV name for the MUX and will be used to get FCOM ID. The 
+<name of the push function> and the <name of the pull function> are also string identifier to describe 
+user defined functions. You can find how you can define the user functions and the string identifiers 
+for the function later in the document. The <description> is for a short description of the MUX.
+
+How to make association between two MUXes:
+For the RF system, we need to make an association between two MUXes. The RF system need to 
+convert the Amplitude and the Phase to the I and Q. Thus, the calculate routine need two attributes. 
+To support this function, we need to make the association.
+If you need to make the association, you can use the following command.
+
+	makeAssociation(<attribute 1>, <attribute 2>)
+
+To use the command, you have created MUXes for the <attribute 1> and the <attribute 2>. These are 
+also string identifiers.
+
+How to use the report function:
+The drvPau has some report function on the command line. Basically, you can use the dbior() 
+command. The dbior() command provides three kind of sessions as the results.
+       PAU session
+If you have one or more PAU(s) in the ioc, you can see the PAU session. The PAU sessions has the 
+following informations.
+-	name: PAU name, the string identifier that you set in the createPAU command
+-	id: PAU ID, HEX number which is used by the drvPau software internally
+-	fiducial counter: incremental decimal number, It will be increased by the fiducial function at 
+every 360Hz.
+-	callback call counter: incremental decimal number, It will be increased by the UltraHigh callback 
+which will be processed when matched pattern is found.
+-	pipeline index: the index number for the advanced pattern matching. The default value is 2. It 
+means, the drvPau evaluate 2 times advanced pattern for the advanced pattern matching.
+-	Activate PAU: It shows the activate status of the PAU (1: ON, 0: OFF). You can adjust it with a 
+PV. If you turn off the PV, the fiducial function will be disabled, and the PAU will not work. You 
+can also turn it on with the PV. The default value is 1:ON.
+-	Activate User Pull function: NOT implemented yet. Default is 1:ON.
+-	Activate User Push function: NOT implemented yet. Default is 1:ON.
+-	Feedback Mode: display the status of the fast feedback (1:ON, 2:OFF). When it has 1, the 
+drvPau get the data from FCOM interface and push the data through the user push function. If 
+it has 0, the drvPau get the data from the data slots which are connected to PV. It means the 
+drvPau works in static offset mode.
+-	Timer resource: Usually, the PAU is using high resolution hardware timer to wake up the 
+UltrHigh callback. The timer resource is a pointer to a memory location for the timer resource 
+object. If this has a NULL value, it means there is no available hardware timer, thus the PAU 
+does not have a hardware timer. Even though, the PAU has timer resource, you can set the 
+delay to 0, then, the PAU does not use the timer to wake up the UltraHigh callback until you 
+set again a non-zero value for the delay.
+-	Delay(usec): This value display your setting for the delay in usec unit. You can adjust it with a 
+PV. The default value is 500usec. 
+-	Number of Muxes: This value shows how many muxes are created in the PAU.
+-	Delay for the timer ISR: This is a real measurement for the timer delay. It measured the time 
+difference between the high resolution timer setting by the fiducial function and waking up 
+the timer ISR. Usually, it has slightly bigger number than the delay. Probably, 1 or 2 usec.
+-	Delay for the Pull function: This is a real measurement of the time difference between the 
+fiducial and the starting the user pull function chain. Actually, A Pau can have a multiple Muxes 
+and each Muxes have own user Pull functions. Thus, the software does not measure the delay 
+for the each user pull functions. It just measured the starting of the pull function chain.
+-	Delay for the Push function: Same as the Delay for the Pull function.
+-	Delay for Diag. function: The PAU has a Diag function which is defined by the PAU itself 
+internally and doing house keeping work. This values is a real measurement of time delay for 
+the Diag. function.
+-	Spin time in the fiducial: It shows, how long time spent by the fiducial function.
+-	Spin time for the Diag. function: Same as the spin time for the fiducial.
+-	Timestamp for the current pattern matching: Shows the timestamp for the last pattern 
+matching for the current pattern matching.
+-	Matched data slot for the current pattern matching:
+-	Pattern status for the current pattern matching:
+-	Timestamp for the advanced pattern matching: Shows the timestamp for the last pattern 
+matching for the advanced one.
+-	Matched data slot for the advanced pattern matching:
+-	Pattern status for the advanced pattern matching:
+ 
+MUX session
+If you have one or more mux(es) in the a PAU. You can see the MUX session in the result of the dbior() 
+command.
+-	MUX name (attribute): the string identifier for the Mux object.
+-	Description: a short note for the mux which has been put by the createMux() command
+-	Pau information: the PAU name which is the owner of the Mux.
+-	Data pull function: function name of the user pull function and the function pointer as HEX
+-	Data push function: function name of the user push function and the function pointer as HEX
+-	Associate Mux: memory location for the associated MUX and the name, if it does not have the 
+associated Mux, this value is a NULL.
+-	Spin time for the pull function(usec): shows how long time took by the user function
+-	Spin time for the push function(usec): same as the push function thing.
+-	Execute counter for the pull function: 
+-	Execute counter for the push function:
+
+Misc. Session
+Finally, the dbior() show up the miscellaneous information about the drvPau. The drvPau uses 
+message queue. In this session, the dbior() shows the Queue ID and how many message are pended 
+in the queue. Usually 0 pending is normal. The dbior() also shows up some more details about the high 
+resolution timer. Total number of the timers, timer id, clock frequency, function pointer for the timer 
+ISR and argument (actually pointer) for the ISR.
+ 
+If you put dbior() command with the interest level (non-zero value), you can see more details 
+information: data slot, exclusion and inclusion masks for the pattern matching and etc.
+	dbior(drvPay, 5)
+
+The dbior() command makes a long results. If you need more shorter results or you are interested in a 
+specific information in the drvPau, you can use the following commands.
+
+-	drvPau_show_list(): show a list of PAU(s) and MUX(es)
+-	drvPau_show_pauReport(<pau name>): shows the PAU session in the dbior() results
+-	drvPau_show_pauPatternReport(<pau name>): shows the exclusion and the inclusion maks 
+for each data slot and the snapshot of the result of the pattern matching.
+-	drvPau_show_muxReport(<mux name>): shows the MUX session in the dbior() results
+-	drvPau_show_muxDataReport(<mux name>): shows the FCOM data slots and Static data slots 
+in the MUX
+
+Registration for the User Pull function and Push function
+The drvPau provides a method to register the user defined function for the Pull and the Push with 
+string identifiers. Actually, the software is using the epics function registration.
+The User function has the following function definition:
+	static void yourUserFunction(void *parg, unsigned char initFlag);
+The user function will be called during the ioc initialize time and drvPau need to process the data pull 
+and push. When it is called the initialize time, the initFlag is set to TRUE. Thus, user can do some 
+initializing processing, if the the initFlag is TRUE. Otherwise, if the initFlag is FALSE, the function should 
+performing the data pull and push. When the drvPau calls the user function, the parg has a pointer for 
+the MUX. Thus, user can get the MUX pointer with the following code.
+	mux_ts *pMux = (mux_ts *) pargs;
+If user need to keep their own data structure, user can use following members in the MUX structure.
+	void *pPullUsr;   void *pPushUsr;
+Thus, user can put the following code for the initialization.
+	pMux->pPullUsr = (void *) pMydataPointer;  /* for the Pull function */
+	pMux->pPushUsr = (void *)pMyDataPointer; /* for the Push function */
+
+User can put the following line in the bottom of the code to register the user function.
+	epicsRegisterFunction(yourUsrFunction);
+User also have to describe the function name in the .dbd file as the following.
+	function(yourUsrFunction)
+Finally, the function name can be used for the string identifier.
+
+APIs
+The drvPau provides a few APIs to access internal information or set some information.
+
+	char *getAttributeFromMux(mux_ts *pMux);
+       The function returns a string pointer which has the attribute for the MUX
+
+	double getDataFromDataSlot(mux_ts *pMux);
+	The function provide a value to implement the actuator. When the feedback mode is turned 
+on, the function provides value from FCOM data slot. If the feedback mode is turned off, the function 
+get the data from the static data slot. The corrected data slot is selected by the advanced pattern 
+matching, because the value which is provided by the function will be implemented for the actuator. 
+This function must called by the user push function.
+
+	int setDataToFcomDataSlot(mux_ts *pMux, double data);
+	The function set data into FCOM data slot. The drvPau uses the current pattern matchings for 
+the function, because this function is used to get the control data from the fast feedback controller. 
+This function must called by the user pull function.
+
+Remarks) The data slots in the PAU have internal structure. The FCOM data and the static Data are 
+stored into different place in the data slot.  If your application call the getDataFromDataSlot function, 
+the PAU check up the operation mode, if FBCK is turned on then the API gets the data from FCOM 
+place in the data slot otherwise the API gets data from static data place in the data slot.
+
+Records for the PAU
+The drvPau package contains record templates for the PAU. The records in the template monitor the 
+behavior of the PAU and control the PAU functions.
+---------------------------	-------	---------------------------------	-------------------------------------------- 
+Record Name		Type	INP/OUT parameter		Description 
+---------------------------	-------	---------------------------------	----------------------------------------------
+$(PAU_REC):FIDCNT	ai	@getFidCnt <pau name>	Fiducial Counter
+$(PAU_REC):FIDREATE	calc	N/A				Fiducial Rate (Hz)
+$(PAU_REC):CBCNT	ai	@getCbCnt <pau name>	Callback calling counter
+$(PAU_REC):CBRATE	calc	N/A				Callback calling rate (Hz)
+$(PAU_REC):DLYISR	ai	@getDlyIsr <pau name>		Measurement for the ISR delay 
+(usec)
+$(PAU_REC):DLYPULL	ai	@getDlyPull <pau name>	Measurement for the Pull function 
+								delay (usec)
+$(PAU_REC):DLYPUSH	ai	@getDlyPush <pau name>	Measurement for the Push function 
+								delay (usec)
+$(PAU_REC):DLYDIAG	ai	@getDlyDiag <pau name>	Measurement for the Diag. function 
+								delay (usec)
+$(PAU_REC):SPNFID	ai	@getSpnFid <pau name>	Measurement for the execution time  
+								for the fiducial function (usec)
+$(PAU_REC):SPNDIAG	ai	@getSpnDiag <pau name>	Measurement for the execution time 
+								for the Diag. function (usec)
+$(PAU_REC):ACTPAU	bo	@setActivatePau <pau name>	Activate PAU control (1:ON, 0:OFF)
+$(PAU_REC):ACTPULL	bo	@setActivateUsrPull <pau name>	Activate/Deactivate 
+									User Pull function(1:ON, 0:OFF)
+$(PAU_REC):ACTPUSH	bo	@setActivateUsrPush <pau name>	Activate/Deactivate 
+									User Push function(1:ON, 
+0:OFF)
+$(PAU_REC):ACTDIAG	bo	@setActivateDiag <pau name>		Activate/Deactivate 
+									Diag. function (1:ON, 0:OFF)
+$(PAU_REC):FBCK	bo	@setFeedbackMode <pau name>	Feedback Mode Control 
+									(1:ON, 0:OFF)
+$(PAU_REC):PIPEIDX	ao	@setPipeIdx <pau name>	Adjust the pipeline index 
+								for the advanced pattern matching
+$(PAU_REC):DELAY	ao	@setDelay <pau name>		Adjust the delay time  
+								for the high resolution hardware timer
+$(PAU_REC):BEAMCODE_<DS>	longout		@setBeamCode <pau name> ds<DS> 
+							Interesting Beam code for the data slot <DS> 
+							(pattern matching)
+$(PAU_REC):TIMESLOT_<DS>	longout		@setTimeSlot <pau name> ds<DS>		
+								Interesting Time Slot for the data 
+slot<DS> 
+							(pattern matching)
+	Remark) <DS> means data slot, [0_9], [A_F]
+$(PAU_REC):INCL<INCL>_<DS>	longout		@setInclMask <pau name> ds<DS> 
+incl<INCL> 
+							Inclusion mask setting
+	Remark) <INCL> means the index for the inclusion mask, [0_5]
+$(PAU_REC):EXCL<EXCL>_<DS>	longout		@setExclMask <pau name> ds<DS> 
+excl<EXCL> 
+							Exclusion mask setting
+	Remark) <EXCL> means the index for the exclusion mask, [0_5]
+
+Record for the MUX
+The drvPau package contains record template for the MUX. The records in the template monitor and 
+control the MUX.
+---------------------------	-------	---------------------------------	-------------------------------------------- 
+Record Name		Type	INP/OUT parameter		Description 
+---------------------------	-------	---------------------------------	----------------------------------------------
+$(ATTR):PULLCNT	ai	@getUsrPullCnt		Calling counter for the user pull 
+function
+$(ATTR):PULLRATE	calc	N/A			Calling rate for the user pull function (Hz)
+$(ATTR):PUSHCNT	ai	@getUsrPushCnt	Calling counter for the user push function
+$(ATTR):PUSHRATE	calc	N/A			Calling rate for the user push function (Hz)
+$(ATTR):PSNPULL	ai	@getSpnUsrPull	Execution time for the user pull function (usec)
+$(ATTR):SPNPUSH	ai	@getSpnUsrPush	Execution time for the user push function 
+(usec)
+$(ATTR):GETFCOM_<DS>	ai	@getfcomData ds<DS> 
+							Get FCOM data in the data slot <DS>
+$(ATTR):GETDATA_<DS>	ai	@getstaticData ds<DS> 
+							Get static data in the data slot <DS>
+$(ATTR):SETDATA_<DS>		ao	@setstaticdata ds<DS> 
+							Set static data into the data slot <DS>

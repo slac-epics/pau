@@ -1,0 +1,4 @@
+device(ai, INST_IO, devAiPau, "PAU")
+device(ao, INST_IO, devAoPau, "PAU")
+device(bo, INST_IO, devBoPau, "PAU")
+device(longout, INST_IO, devLongoutPau, "PAU")

@@ -1,0 +1,10 @@
+The Pau package provides two edm screen examples: pau.edl and mux.edl. 
+You can bring it up with the following MACROS.
+
+
+-----------	--------------		----------------------------------
+EDL filex	MACRO			Description
+-----------	--------------		----------------------------------
+pau.edl		PAU_REC			PAU control and monitoring screen
+mux.edl		ATTR			MUX monitoring, set  data slots
+

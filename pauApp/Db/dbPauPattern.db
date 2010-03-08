@@ -1,0 +1,15 @@
+record(longout, "$(PAU_REC):INCL$(INCL)_$(DS)")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "Passive")
+    field(OUT, "@setInclMask $(PAU) ds$(DS) incl$(INCL)")
+    field(DESC, "Inclusion mask")
+}
+
+record(longout, "$(PAU_REC):EXCL$(EXCL)_$(DS)")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "Passive")
+    field(OUT, "@setExclMask $(PAU) ds$(DS) excl$(EXCL)")
+    field(DESC, "Excusion mask")
+}

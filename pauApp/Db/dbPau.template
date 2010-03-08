@@ -1,0 +1,143 @@
+file db/dbPau.db
+{
+pattern {    PAU_REC,    PAU }
+        { $(PAU_REC), $(PAU) }
+}
+
+file db/dbPauBeamcodeTimeslot.db
+{
+pattern{    PAU_REC,    PAU, DS }
+       { $(PAU_REC), $(PAU),  0 }   # for DS0
+       { $(PAU_REC), $(PAU),  1 }   # for DS1
+       { $(PAU_REC), $(PAU),  2 }   # for DS2
+       { $(PAU_REC), $(PAU),  3 }   # for DS3
+       { $(PAU_REC), $(PAU),  4 }   # for DS4
+       { $(PAU_REC), $(PAU),  5 }   # for DS5
+       { $(PAU_REC), $(PAU),  6 }   # for DS6
+       { $(PAU_REC), $(PAU),  7 }   # for DS7
+       { $(PAU_REC), $(PAU),  8 }   # for DS8
+       { $(PAU_REC), $(PAU),  9 }   # for DS9
+       { $(PAU_REC), $(PAU),  A }   # for DSA
+       { $(PAU_REC), $(PAU),  B }   # for DSB
+       { $(PAU_REC), $(PAU),  C }   # for DSC
+       { $(PAU_REC), $(PAU),  D }   # for DSD
+       { $(PAU_REC), $(PAU),  E }   # for DSE
+       { $(PAU_REC), $(PAU),  F }   # for DSF
+}
+
+file db/dbPauPattern.db
+{
+pattern {    PAU_REC,    PAU,  DS, INCL, EXCL }
+# for DS0
+        { $(PAU_REC), $(PAU),   0,    0,    0 }
+        { $(PAU_REC), $(PAU),   0,    1,    1 }
+        { $(PAU_REC), $(PAU),   0,    2,    2 }
+        { $(PAU_REC), $(PAU),   0,    3,    3 }
+        { $(PAU_REC), $(PAU),   0,    4,    4 }
+        { $(PAU_REC), $(PAU),   0,    5,    5 }
+# for DS1
+        { $(PAU_REC), $(PAU),   1,    0,    0 }
+        { $(PAU_REC), $(PAU),   1,    1,    1 }
+        { $(PAU_REC), $(PAU),   1,    2,    2 }
+        { $(PAU_REC), $(PAU),   1,    3,    3 }
+        { $(PAU_REC), $(PAU),   1,    4,    4 }
+        { $(PAU_REC), $(PAU),   1,    5,    5 }
+# for DS2
+        { $(PAU_REC), $(PAU),   2,    0,    0 }
+        { $(PAU_REC), $(PAU),   2,    1,    1 }
+        { $(PAU_REC), $(PAU),   2,    2,    2 }
+        { $(PAU_REC), $(PAU),   2,    3,    3 }
+        { $(PAU_REC), $(PAU),   2,    4,    4 }
+        { $(PAU_REC), $(PAU),   2,    5,    5 }
+# for DS3
+        { $(PAU_REC), $(PAU),   3,    0,    0 }
+        { $(PAU_REC), $(PAU),   3,    1,    1 }
+        { $(PAU_REC), $(PAU),   3,    2,    2 }
+        { $(PAU_REC), $(PAU),   3,    3,    3 }
+        { $(PAU_REC), $(PAU),   3,    4,    4 }
+        { $(PAU_REC), $(PAU),   3,    5,    5 }
+# for DS4
+        { $(PAU_REC), $(PAU),   4,    0,    0 }
+        { $(PAU_REC), $(PAU),   4,    1,    1 }
+        { $(PAU_REC), $(PAU),   4,    2,    2 }
+        { $(PAU_REC), $(PAU),   4,    3,    3 }
+        { $(PAU_REC), $(PAU),   4,    4,    4 }
+        { $(PAU_REC), $(PAU),   4,    5,    5 }
+# for DS5
+        { $(PAU_REC), $(PAU),   5,    0,    0 }
+        { $(PAU_REC), $(PAU),   5,    1,    1 }
+        { $(PAU_REC), $(PAU),   5,    2,    2 }
+        { $(PAU_REC), $(PAU),   5,    3,    3 }
+        { $(PAU_REC), $(PAU),   5,    4,    4 }
+        { $(PAU_REC), $(PAU),   5,    5,    5 }
+# for DS6
+        { $(PAU_REC), $(PAU),   6,    0,    0 }
+        { $(PAU_REC), $(PAU),   6,    1,    1 }
+        { $(PAU_REC), $(PAU),   6,    2,    2 }
+        { $(PAU_REC), $(PAU),   6,    3,    3 }
+        { $(PAU_REC), $(PAU),   6,    4,    4 }
+        { $(PAU_REC), $(PAU),   6,    5,    5 }
+# for DS7
+        { $(PAU_REC), $(PAU),   7,    0,    0 }
+        { $(PAU_REC), $(PAU),   7,    1,    1 }
+        { $(PAU_REC), $(PAU),   7,    2,    2 }
+        { $(PAU_REC), $(PAU),   7,    3,    3 }
+        { $(PAU_REC), $(PAU),   7,    4,    4 }
+        { $(PAU_REC), $(PAU),   7,    5,    5 }
+# for DS8
+        { $(PAU_REC), $(PAU),   8,    0,    0 }
+        { $(PAU_REC), $(PAU),   8,    1,    1 }
+        { $(PAU_REC), $(PAU),   8,    2,    2 }
+        { $(PAU_REC), $(PAU),   8,    3,    3 }
+        { $(PAU_REC), $(PAU),   8,    4,    4 }
+        { $(PAU_REC), $(PAU),   8,    5,    5 }
+# for DS9
+        { $(PAU_REC), $(PAU),   9,    0,    0 }
+        { $(PAU_REC), $(PAU),   9,    1,    1 }
+        { $(PAU_REC), $(PAU),   9,    2,    2 }
+        { $(PAU_REC), $(PAU),   9,    3,    3 }
+        { $(PAU_REC), $(PAU),   9,    4,    4 }
+        { $(PAU_REC), $(PAU),   9,    5,    5 }
+# for DSA
+        { $(PAU_REC), $(PAU),   A,    0,    0 }
+        { $(PAU_REC), $(PAU),   A,    1,    1 }
+        { $(PAU_REC), $(PAU),   A,    2,    2 }
+        { $(PAU_REC), $(PAU),   A,    3,    3 }
+        { $(PAU_REC), $(PAU),   A,    4,    4 }
+        { $(PAU_REC), $(PAU),   A,    5,    5 }
+# for DSB
+        { $(PAU_REC), $(PAU),   B,    0,    0 }
+        { $(PAU_REC), $(PAU),   B,    1,    1 }
+        { $(PAU_REC), $(PAU),   B,    2,    2 }
+        { $(PAU_REC), $(PAU),   B,    3,    3 }
+        { $(PAU_REC), $(PAU),   B,    4,    4 }
+        { $(PAU_REC), $(PAU),   B,    5,    5 }
+# for DSC
+        { $(PAU_REC), $(PAU),   C,    0,    0 }
+        { $(PAU_REC), $(PAU),   C,    1,    1 }
+        { $(PAU_REC), $(PAU),   C,    2,    2 }
+        { $(PAU_REC), $(PAU),   C,    3,    3 }
+        { $(PAU_REC), $(PAU),   C,    4,    4 }
+        { $(PAU_REC), $(PAU),   C,    5,    5 }
+# for DSD
+        { $(PAU_REC), $(PAU),   D,    0,    0 }
+        { $(PAU_REC), $(PAU),   D,    1,    1 }
+        { $(PAU_REC), $(PAU),   D,    2,    2 }
+        { $(PAU_REC), $(PAU),   D,    3,    3 }
+        { $(PAU_REC), $(PAU),   D,    4,    4 }
+        { $(PAU_REC), $(PAU),   D,    5,    5 }
+# for DSE
+        { $(PAU_REC), $(PAU),   E,    0,    0 }
+        { $(PAU_REC), $(PAU),   E,    1,    1 }
+        { $(PAU_REC), $(PAU),   E,    2,    2 }
+        { $(PAU_REC), $(PAU),   E,    3,    3 }
+        { $(PAU_REC), $(PAU),   E,    4,    4 }
+        { $(PAU_REC), $(PAU),   E,    5,    5 }
+# for DSF
+        { $(PAU_REC), $(PAU),   F,    0,    0 }
+        { $(PAU_REC), $(PAU),   F,    1,    1 }
+        { $(PAU_REC), $(PAU),   F,    2,    2 }
+        { $(PAU_REC), $(PAU),   F,    3,    3 }
+        { $(PAU_REC), $(PAU),   F,    4,    4 }
+        { $(PAU_REC), $(PAU),   F,    5,    5 }
+}

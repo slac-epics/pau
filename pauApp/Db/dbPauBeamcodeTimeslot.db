@@ -1,0 +1,15 @@
+record(longout, "$(PAU_REC):BEAMCODE_$(DS)")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "Passive")
+    field(OUT, "@setBeamCode $(PAU) ds$(DS)")
+    field(DESC, "Beam code")
+}
+
+record(longout, "$(PAU_REC):TIMESLOT_$(DS)")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "Passive")
+    field(OUT, "@setTimeSlot $(PAU) ds$(DS)")
+    field(DESC, "Time slot")
+}
