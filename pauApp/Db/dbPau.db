@@ -108,6 +108,7 @@ record(bo, "$(PAU_REC):ACTPAU")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
     field(VAL, "1")
+    field(PINI, "YES")
 }
 
 record(bo, "$(PAU_REC):ACTPULL")
@@ -118,6 +119,7 @@ record(bo, "$(PAU_REC):ACTPULL")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
     field(VAL, "1")
+    field(PINI, "YES")
 }
 
 record(bo, "$(PAU_REC):ACTPUSH")
@@ -128,6 +130,7 @@ record(bo, "$(PAU_REC):ACTPUSH")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
     field(VAL, "1")
+    field(PINI, "YES")
 }
 
 record(bo, "$(PAU_REC):ACTDIAG")
@@ -138,6 +141,7 @@ record(bo, "$(PAU_REC):ACTDIAG")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
     field(VAL, "1")
+    field(PINI, "YES")
 }
 
 record(bo, "$(PAU_REC):FBCK")
@@ -148,6 +152,7 @@ record(bo, "$(PAU_REC):FBCK")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
     field(VAL, "1")
+    field(PINI, "YES")
 }
 
 record(ao, "$(PAU_REC):PIPEIDX")
@@ -156,6 +161,7 @@ record(ao, "$(PAU_REC):PIPEIDX")
     field(OUT, "@setPipIdx $(PAU)")
     field(DESC, "EVR pipeline index for $(PAU)")
     field(PREC, "0")
+    field(PINI, "YES")
 }
 
 record(ao, "$(PAU_REC):DELAY")
@@ -165,4 +171,5 @@ record(ao, "$(PAU_REC):DELAY")
     field(DESC, "Timer delay for $(PAU)")
     field(EGU, "micro-sec")
     field(PREC, "3")
+    field(PINI, "YES")
 }

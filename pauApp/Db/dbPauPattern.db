@@ -4,6 +4,7 @@ record(longout, "$(PAU_REC):INCL$(INCL)_$(DS)")
     field(SCAN, "Passive")
     field(OUT, "@setInclMask $(PAU) ds$(DS) incl$(INCL)")
     field(DESC, "Inclusion mask")
+    field(PINI, "YES")
 }
 
 record(longout, "$(PAU_REC):EXCL$(EXCL)_$(DS)")
@@ -12,4 +13,5 @@ record(longout, "$(PAU_REC):EXCL$(EXCL)_$(DS)")
     field(SCAN, "Passive")
     field(OUT, "@setExclMask $(PAU) ds$(DS) excl$(EXCL)")
     field(DESC, "Excusion mask")
+    field(PINI, "YES")
 }

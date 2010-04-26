@@ -69,5 +69,6 @@ record(bo, "$(MUX_REC):FBCK")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
     field(VAL, "1")
+    field(PINI, "YES")
 }
 

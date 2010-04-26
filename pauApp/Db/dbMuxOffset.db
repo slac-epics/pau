@@ -4,6 +4,7 @@ record(ao, "$(MUX_REC)")
     field(DESC, "Master SetValue")
     field(FLNK, "$(MUX_REC):FANOUT0")
     field(PREC, "3")
+    field(PINI, "YES")
 }
 
 ## data slot 0 ##
@@ -13,6 +14,8 @@ record(ao, "$(MUX_REC):OFFSET_0")
     field(DTYP, "Soft Channel")
     field(DESC, "Offset for DS0")
     field(PREC, "3")
+    field(FLNK, "$(MUX_REC):CALCOUT_0")
+    field(PINI, "YES")
 }
 
 record(calcout, "$(MUX_REC):CALCOUT_0")
@@ -31,6 +34,8 @@ record(ao, "$(MUX_REC):OFFSET_1")
     field(DTYP, "Soft Channel")
     field(DESC, "Offset for DS1")
     field(PREC, "3")
+    field(FLNK, "$(MUX_REC):CALCOUT_1")
+    field(PINI, "YES")
 }
 
 record(calcout, "$(MUX_REC):CALCOUT_1")
@@ -50,6 +55,8 @@ record(ao, "$(MUX_REC):OFFSET_2")
     field(DTYP, "Soft Channel")
     field(DESC, "Offset for DS2")
     field(PREC, "3")
+    field(FLNK, "$(MUX_REC):CALCOUT_2")
+    field(PINI, "YES")
 }
 
 record(calcout, "$(MUX_REC):CALCOUT_2")
@@ -68,6 +75,8 @@ record(ao, "$(MUX_REC):OFFSET_3")
     field(DTYP, "Soft Channel")
     field(DESC, "Offset for DS3")
     field(PREC, "3")
+    field(FLNK, "$(MUX_REC):CALCOUT_3")
+    field(PINI, "YES")
 }
 
 record(calcout, "$(MUX_REC):CALCOUT_3")

@@ -4,6 +4,7 @@ record(longout, "$(PAU_REC):BEAMCODE_$(DS)")
     field(SCAN, "Passive")
     field(OUT, "@setBeamCode $(PAU) ds$(DS)")
     field(DESC, "Beam code")
+    field(PINI, "YES")
 }
 
 record(longout, "$(PAU_REC):TIMESLOT_$(DS)")
@@ -12,4 +13,5 @@ record(longout, "$(PAU_REC):TIMESLOT_$(DS)")
     field(SCAN, "Passive")
     field(OUT, "@setTimeSlot $(PAU) ds$(DS)")
     field(DESC, "Time slot")
+    field(PINI, "YES")
 }
