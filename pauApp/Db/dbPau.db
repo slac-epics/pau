@@ -104,11 +104,11 @@ record(bo, "$(PAU_REC):ACTPAU")
 {
     field(DTYP, "PAU")
     field(OUT, "@setActivatePau $(PAU)")
+    field(OMSL, "supervisory")
+    field(PINI, "YES")
     field(DESC, "Activate PAU for $(PAU)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
-    field(VAL, "1")
-    field(PINI, "YES")
 }
 
 record(bo, "$(PAU_REC):ACTPULL")
@@ -118,8 +118,6 @@ record(bo, "$(PAU_REC):ACTPULL")
     field(DESC, "Activate Pull func for $(PAU)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
-    field(VAL, "1")
-    field(PINI, "YES")
 }
 
 record(bo, "$(PAU_REC):ACTPUSH")
@@ -129,8 +127,6 @@ record(bo, "$(PAU_REC):ACTPUSH")
     field(DESC, "Activate Push func for $(PAU)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
-    field(VAL, "1")
-    field(PINI, "YES")
 }
 
 record(bo, "$(PAU_REC):ACTDIAG")
@@ -140,36 +136,40 @@ record(bo, "$(PAU_REC):ACTDIAG")
     field(DESC, "Activate Diag for $(PAU)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
-    field(VAL, "1")
-    field(PINI, "YES")
 }
 
 record(bo, "$(PAU_REC):FBCK")
 {
     field(DTYP, "PAU")
     field(OUT, "@setFeedbackMode $(PAU)")
+    field(OMSL, "supervisory")
+    field(PINI, "YES")
     field(DESC, "Feedback mode for $(PAU)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
-    field(VAL, "1")
-    field(PINI, "YES")
 }
 
 record(ao, "$(PAU_REC):PIPEIDX")
 {
     field(DTYP, "PAU")
     field(OUT, "@setPipIdx $(PAU)")
+    field(OMSL, "supervisory")
+    field(PINI, "YES")
+    field(HOPR, "3")
+    field(DRVH, "3")
     field(DESC, "EVR pipeline index for $(PAU)")
     field(PREC, "0")
-    field(PINI, "YES")
 }
 
 record(ao, "$(PAU_REC):DELAY")
 {
     field(DTYP, "PAU")
     field(OUT, "@setDelay $(PAU)")
+    field(OMSL, "supervisory")
+    field(PINI, "YES")
+    field(HOPR, "2000")
+    field(DRVH, "2000")
     field(DESC, "Timer delay for $(PAU)")
     field(EGU, "micro-sec")
     field(PREC, "3")
-    field(PINI, "YES")
 }

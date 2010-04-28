@@ -527,7 +527,7 @@ static long devAoPau_init_record(aoRecord *precord)
     precord->dpvt = (void *) precPrv;
    
 
-    return 0; 
+    return 2; 
 }
 
 static long devAoPau_write_ao(aoRecord *precord)
@@ -632,7 +632,7 @@ static long devBoPau_init_record(boRecord *precord)
    
     precord->udf  = FALSE;
     precord->dpvt = (void*) precPrv;
-    return 0;
+    return 2;
 }
 
 static long devBoPau_write_bo(boRecord *precord)
@@ -761,7 +761,7 @@ static long devLongoutPau_init_record(longoutRecord *precord)
     precord->udf  = FALSE;
     precord->dpvt = (void*) precPrv;
 
-    return 0;
+    return 2;
 }
 
 static long devLongoutPau_write_lo(longoutRecord *precord)
