@@ -1,5 +1,7 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R0-1-4: Apr 28, 2010  (KHKIM)
+    Change to allow save/restore for BO and AO records
 pau-R0-1-3: Apr 25, 2010  (KHKIM)
     Put PINI field to allow the restore function
     Implement force update when offset get new values
