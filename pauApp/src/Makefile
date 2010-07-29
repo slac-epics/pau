@@ -31,7 +31,7 @@ EVR_IOC_LIBS += generalTime
 
 LIBRARY_IOC$(BUILDFOR) += pau
 
-INC += drvPau.h  drvPauReport.h  drvPauTimer.h
+INC += drvPau.h  drvPauReport.h  drvPauTimer.h 
 
 DBD += drvPau.dbd
 DBD += devPau.dbd
@@ -43,7 +43,6 @@ pau_SRCS += drvPau.c
 pau_SRCS += drvPauReport.c
 pau_SRCS += drvPauTimer.c
 pau_SRCS += devPau.c
-
 pau_SRCS += drvPauUsr.c
 
 pau_DBD += drvPau.dbd

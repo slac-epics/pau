@@ -263,12 +263,16 @@ static void pauFiducial(void *pArg)
         pPau->timestamp = timestamp_current;
         if(matches_current) {
             pPau->current.timestamp       = timestamp_current;
+            pPau->current.prev_timestamp[dataslot_current] = pPau->current.timestamp;
             pPau->current.matchedDataSlot = dataslot_current;
             pPau->current.usedFlag        = 0;
             pPau->current.patternStatus   = patternStatus_current;
         } else dataslot_current = -1;
 
         if(matches_advance) {
+
+            pPau->advance.prev_timestamp[dataslot_advance] = pPau->advance.timestamp;
+
             pPau->advance.timestamp       = timestamp_advance;
             pPau->advance.matchedDataSlot = dataslot_advance;
             pPau->advance.usedFlag        = 0;
@@ -723,6 +727,41 @@ int setDataToFcomDataSlot(mux_ts *pMux, double data)
 
 
 
+
+int pauVerifyPulseIdFcomBlob(FcomBlob *pBlob, mux_ts *pMux)
+{
+    pau_ts         *pPau          = pMux->pPau;
+    unsigned int   dataSlot       = pPau->advance.matchedDataSlot;
+    epicsTimeStamp prev_timestamp = pPau->current.prev_timestamp[dataSlot];
+    epicsTimeStamp sent_timestamp;
+    unsigned int   sentPulseId, matchedPulseId;
+
+    if(pBlob) {
+
+       if((pBlob->hdr.vers != FCOM_PROTO_VERSION) ||
+          (pBlob->hdr.type != FCOM_EL_DOUBLE)) return PAU_FCOM_MISMATCH;  /* version/type mismatch */
+
+        sent_timestamp.secPastEpoch = pBlob->fc_tsHi;
+        sent_timestamp.nsec         = pBlob->fc_tsLo;
+
+        matchedPulseId              = PULSEID(prev_timestamp);
+        sentPulseId                 = PULSEID(sent_timestamp);
+
+        if(matchedPulseId != sentPulseId) return PAU_FCOM_WRONGTIMMING;   /* Not healthy */
+        else                              return PAU_FCOM_OK;  /* OK */
+    }
+
+
+    return PAU_FCOM_COMMERR;   /* communication error */
+}
+
+
+int  makeFcomPVNamewithSlotNumber(const char *muxName, const char *fcomPVName, int slot_number)
+{
+   return  sprintf(fcomPVName, "%s:GETFCOM_%d", muxName, slot_number);
+
+}
+
 
 
 

@@ -264,6 +264,21 @@ stored into different place in the data slot.  If your application call the getD
 the PAU check up the operation mode, if FBCK is turned on then the API gets the data from FCOM 
 place in the data slot otherwise the API gets data from static data place in the data slot.
 
+
+	int pauVerifyPulseIdFcomBlob(FcomBlob *pBlob, mux_ts *pMux)
+
+	This function compare pulse IDs between current matched pattern and FCOM blob. If those two 
+Pulse ID matched, it returns 0. If pulse ID is not matched, it returns 1. Even, it returns positive
+values, it is not critical to operate. Because, the retarded data still goes to corrected data slot.
+If this function returns negative value, it means critical exception. The return value -1 means FCOM protocol 
+version mismatch, the reuturn value -2 means it does not have a correct blob.
+
+	int makeFcomPVNamewithSlotNumber(const char *muxName, const char *fcomPVNAme, int slot_number)
+
+	This function makes PV name to FCOM request name.
+ex) PV_NAME = ACCL:LI21:1:L1S_PDES
+    FCOM_REQUEST_NAME = ACCL:LI21:1:L1S_PDES:GETFCOM_0, ACCL:LI21:1:L1S_PDES:GETFCOM_1
+
 Records for the PAU
 The drvPau package contains record templates for the PAU. The records in the template monitor the 
 behavior of the PAU and control the PAU functions.

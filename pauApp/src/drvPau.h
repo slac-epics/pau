@@ -8,13 +8,19 @@
 #include <epicsRingBytes.h>
 #include <registryFunction.h>   /* REGISTRYFUNCTION */
 
-/*
 #include <fcom_api.h>
-*/
+#include <fcomUtil.h>
 
 #include <evrTime.h>
 #include <evrPattern.h>
 #include <drvPauTimer.h>
+
+#define PAU_FCOM_OK              0
+#define PAU_FCOM_COMMERR        -1
+#define PAU_FCOM_WRONGTIMMING    1
+#define PAU_FCOM_MISMATCH       -2
+
+
 
 
 #ifdef __cplusplus
@@ -106,6 +112,7 @@ typedef struct {
 
 typedef struct {
     epicsTimeStamp     timestamp;
+    epicsTimeStamp     prev_timestamp[MAXNUM_DATASLOTS];
     unsigned int       matchedDataSlot;
     unsigned int       usedFlag;
     unsigned long      patternStatus;
@@ -194,6 +201,10 @@ char *getDevNameFromMux(mux_ts *pMux);
 double getDataFromDataSlot(mux_ts *pMux);
 double getDataFromDataSlot_vMux(mux_ts *pMux);
 int setDataToFcomDataSlot(mux_ts *pMux, double data);
+
+int  makeFcomPVNamewithSlotNumber(const char *muxName, const char *fcomPVName, int slot_number);
+int  pauVerifyPulseIdFcomBlob(FcomBlob *pBlob, mux_ts *pMux);
+
 
 
 #ifdef __cplusplus
