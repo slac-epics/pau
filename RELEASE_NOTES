@@ -1,9 +1,10 @@
 Release Notes for the PAU package
 ---------------------------------
-pau-R0-1-6: July 16, 2010 (KHKIM)
-    Add up previous mathced timestamp, we can utilize it for FCOM data verification.
-
-    ex) if (pPau->current.prev_timestamp[current_dataslot] == fcom_sent_timestamp) { /* todo */ }
+pau-R0-1-6: July 30, 2010 (KHKIM)
+    Add up FCOM pulse ID matching for current pattern matching
+    Please, find the description of the following APIs in the README file
+	int pauVerifyPulseIdFcomBlob(FcomBlob *pBlob, mux_ts *pMux)
+	int makeFcomPVNamewithSlotNumber(const char *muxName, const char *fcomPVNAme, int slot_number)
 
 pau-R0-1-5: Jun 2, 2010  (dfairley)
 	change to build with event-R3-2-1
