@@ -1,5 +1,9 @@
 Release Notes for the PAU package
 ---------------------------------
+
+pau-R0-1-7: Auguest 12, 2010 (KHKIM)
+    Just re-build with the new fcomUtil (R1-0-0).
+
 pau-R0-1-6: July 30, 2010 (KHKIM)
     Add up FCOM pulse ID matching for current pattern matching
     Please, find the description of the following APIs in the README file
