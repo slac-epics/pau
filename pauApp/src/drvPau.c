@@ -731,7 +731,7 @@ int setDataToFcomDataSlot(mux_ts *pMux, double data)
 int pauVerifyPulseIdFcomBlob(FcomBlob *pBlob, mux_ts *pMux)
 {
     pau_ts         *pPau          = pMux->pPau;
-    unsigned int   dataSlot       = pPau->advance.matchedDataSlot;
+    unsigned int   dataSlot       = pPau->current.matchedDataSlot;
     epicsTimeStamp prev_timestamp = pPau->current.prev_timestamp[dataSlot];
     epicsTimeStamp sent_timestamp;
     unsigned int   sentPulseId, matchedPulseId;
