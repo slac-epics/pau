@@ -1,0 +1,47 @@
+/*
+ *    sncPau.stt
+ *    Auth: KHKIM
+ *
+*/
+
+program sncPau
+option +r;
+
+int       index;
+
+int       feedback_mode;
+assign    feedback_mode  to "{MUX_NAME}:FBCK";
+monitor   feedback_mode;
+
+double    offset[4];
+assign    offset         to { "{MUX_NAME}:OFFSET_0",
+                              "{MUX_NAME}:OFFSET_1",
+                              "{MUX_NAME}:OFFSET_2",
+                              "{MUX_NAME}:OFFSET_3" };
+double    fcom[4];
+assign    fcom          to { "{MUX_NAME}:GETFCOM_0",
+                             "{MUX_NAME}:GETFCOM_1",
+                             "{MUX_NAME}:GETFCOM_2",
+                             "{MUX_NAME}:GETFCOM_3" };
+monitor   fcom;
+evflag    ev_fcom;
+sync      fcom[0]   ev_fcom;
+
+double    master;
+assign    master        to "{MUX_NAME}";
+
+ss bwProp
+{
+    state calc_bwProp
+    {
+        when(feedback_mode && efTestAndClear(ev_fcom)) {
+            master = fcom[0];
+            for(index = 0; index <4; index++) {
+                offset[index] = fcom[index] - master;
+                pvPut(offset[index]);
+            }
+            pvPut(master);
+        } state calc_bwProp
+    } 
+}
+

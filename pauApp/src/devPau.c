@@ -671,6 +671,7 @@ static long devBoPau_write_bo(boRecord *precord)
             pMux = precPrv->pMux;
             epicsMutexLock(pMux->lockMux);
                 pMux->fbckMode = (precord->rval)?1:0;
+                if(pMux->fbckMode) updateFcomDataSlotFromStaticDataSlot(pMux, 0 /* don't need mutex lock */);
             epicsMutexUnlock(pMux->lockMux);
             break;
     }

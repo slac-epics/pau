@@ -17,7 +17,8 @@ xxx_LIBS += pau
 (4)	Add the following .dbd fioles to xxxApp/src/Makefile or to xxxApp/src/xxxInclude.dbd: 
 xxx_DBD += drvPau.dbd 
 xxx_DBD += devPau.dbd 
-xxx_DBD += drvPauUsr.dbd 
+xxx_DBD += drvPauUsr.dbd
+xxx_DBD += sncPau.dbd
 
 (5)	Add the PAU database to your application. For an example, see: 
 pau/<release>/src/Db/README 

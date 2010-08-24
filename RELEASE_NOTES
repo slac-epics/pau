@@ -1,6 +1,13 @@
 Release Notes for the PAU package
 ---------------------------------
 
+pau-R0-1-9: Auguest 23, 2010 (KHKIM)
+    Define the transient behavior between fast feedback ON and OFF
+    ON: update fcom data slot from latest static data slot
+    The mutex protection for the data slots
+    Implement the backward propagation for master MUX PV
+ 
+
 pau-R0-1-8: Auguest 22, 2010 (KHKIM)
     Bug fix in PulseID matching function for the interlaced mode
 

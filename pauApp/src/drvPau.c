@@ -697,9 +697,16 @@ double getDataFromDataSlot(mux_ts *pMux)
     pau_ts       *pPau           = pMux->pPau;
     unsigned int matchedDataSlot = pPau->advance.matchedDataSlot;
     dataSlot_ts  *pdataSlot      = pMux->dataSlot + matchedDataSlot;
+    double       data;
 
-    if(pPau->fbckMode) return pdataSlot->fcomData;
-    else               return pdataSlot->staticData;
+    epicsMutexLock(pMux->lockMux);
+
+    if(pPau->fbckMode) data = pdataSlot->fcomData;
+    else               data = pdataSlot->staticData;
+
+    epicsMutexUnlock(pMux->lockMux);
+
+    return data;
 
 }
 
@@ -708,9 +715,16 @@ double getDataFromDataSlot_vMux(mux_ts *pMux)
     pau_ts       *pPau           = pMux->pPau;
     unsigned     matchedDataSlot = pPau->advance.matchedDataSlot;
     dataSlot_ts  *pdataSlot      = pMux->dataSlot + matchedDataSlot;
+    double       data;
 
-    if(pMux->fbckMode) return pdataSlot->fcomData;
-    else               return pdataSlot->staticData;
+    epicsMutexLock(pMux->lockMux);
+
+    if(pMux->fbckMode) data = pdataSlot->fcomData;
+    else               data = pdataSlot->staticData;
+
+    epicsMutexUnlock(pMux->lockMux);
+
+    return data;
 }
 
 int setDataToFcomDataSlot(mux_ts *pMux, double data)
@@ -719,10 +733,47 @@ int setDataToFcomDataSlot(mux_ts *pMux, double data)
     unsigned int matchedDataSlot = pPau->current.matchedDataSlot;
     dataSlot_ts  *pdataSlot      = pMux->dataSlot + matchedDataSlot;
 
+    epicsMutexLock(pMux->lockMux);
 
     pdataSlot->fcomData = data;
 
+    epicsMutexUnlock(pMux->lockMux);
+
     return 0;
+}
+
+
+void updateFcomDataSlotFromStaticDataSlot(mux_ts *pMux, unsigned mutex_protection)
+{
+    pau_ts       *pPau = pMux->pPau;
+    unsigned int idx;
+    dataSlot_ts  *pdataSlot;
+
+    if(mutex_protection) epicsMutexLock(pMux->lockMux);
+
+    for(idx=0; idx < MAXNUM_DATASLOTS; idx++) {
+        pdataSlot           = pMux->dataSlot + idx;
+        pdataSlot->fcomData = pdataSlot->staticData;
+    }
+
+    if(mutex_protection) epicsMutexUnlock(pMux->lockMux);
+}
+
+
+void updateStaticDataSlotFromFcomDataSlot(mux_ts *pMux, unsigned mutex_protection)
+{
+    pau_ts       *pPau = pMux->pPau;
+    unsigned int idx;
+    dataSlot_ts  *pdataSlot;
+
+    if(mutex_protection) epicsMutexLock(pMux->lockMux);
+
+    for(idx=0; idx < MAXNUM_DATASLOTS; idx++) {
+        pdataSlot             = pMux->dataSlot + idx;
+        pdataSlot->staticData = pdataSlot->fcomData;
+    }
+
+    if(mutex_protection) epicsMutexUnlock(pMux->lockMux);
 }
 
 

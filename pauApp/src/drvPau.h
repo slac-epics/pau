@@ -201,6 +201,8 @@ char *getDevNameFromMux(mux_ts *pMux);
 double getDataFromDataSlot(mux_ts *pMux);
 double getDataFromDataSlot_vMux(mux_ts *pMux);
 int setDataToFcomDataSlot(mux_ts *pMux, double data);
+void updateFcomDataSlotFromStaticDataSlot(mux_ts *pMux, unsigned mutex_protection);
+void updateStaticDataSlotFromFcomDataSlot(mux_ts *pMux, unsigned mutex_protection);
 
 int  makeFcomPVNamewithSlotNumber(const char *muxName, const char *fcomPVName, int slot_number);
 int  pauVerifyPulseIdFcomBlob(FcomBlob *pBlob, mux_ts *pMux);
