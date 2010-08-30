@@ -7,6 +7,15 @@
 program sncPau
 option +r;
 
+%{
+#define ADMIN_OFF         0
+#define ADMIN_ON          1
+#define ADMIN_UNAVAILABLE 2
+#define FBCK_OFF          0
+#define FBCK_ON           1
+}%
+
+
 int       index;
 
 int       feedback_mode;
@@ -30,6 +39,13 @@ sync      fcom[0]   ev_fcom;
 double    master;
 assign    master        to "{MUX_NAME}";
 
+int       admin;
+assign    admin   to  "{ADMIN_NAME}";
+monitor   admin;
+evflag    ev_admin;
+sync      admin    ev_admin;
+
+
 ss bwProp
 {
     state calc_bwProp
@@ -45,3 +61,29 @@ ss bwProp
     } 
 }
 
+
+ss iocAdmin
+{
+    state init
+    {
+        when(admin == ADMIN_UNAVAILABLE) {
+            admin = ADMIN_OFF;
+            pvPut(admin);
+        } state check_mode
+    }
+
+    state check_mode
+    {
+        when(1) {
+            if(admin == ADMIN_OFF)         { feedback_mode = FBCK_OFF; pvPut(feedback_mode); }
+            if(admin == ADMIN_ON)          { feedback_mode = FBCK_ON;  pvPut(feedback_mode); }
+            if(admin == ADMIN_UNAVAILABLE) { feedback_mode = FBCK_OFF; pvPut(feedback_mode); }
+        } state wait_admin
+    }
+
+    state wait_admin
+    {
+        when(efTestAndClear(ev_admin)) {
+        } state check_mode
+    }
+}

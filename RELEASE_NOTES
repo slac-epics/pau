@@ -1,5 +1,7 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-1-0: Auguest 30, 2010 (KHKIM)
+    Make relation with iocAdmin PV for the fast feedback on/off
 
 pau-R0-1-9: Auguest 23, 2010 (KHKIM)
     Define the transient behavior between fast feedback ON and OFF
