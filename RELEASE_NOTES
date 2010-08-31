@@ -1,5 +1,9 @@
 Release Notes for the PAU package
 ---------------------------------
+
+pau-R1-1-1: Aug 31, 2010 (KHKIM)
+    Bug fix in init state in the iocAdmin state set in the sncPau.
+
 pau-R1-1-0: Auguest 30, 2010 (KHKIM)
     Make relation with iocAdmin PV for the fast feedback on/off
 
