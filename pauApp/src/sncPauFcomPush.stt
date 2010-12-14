@@ -99,8 +99,6 @@ static int pushFcom(unsigned long usrData, double value)
     if(!pUsr->status) pUsr->succCnt++;
     else              pUsr->failCnt++;
 
-    if(!pUsr->status) epicsPrintf("fcomPush (%s): %lf\n", pUsr->fcomPVName, pUsr->pushVal);
-
     return pUsr->status;
 }
 
