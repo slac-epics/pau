@@ -108,6 +108,7 @@ static int pushFcom(unsigned long usrData, double value)
 int            i;
 unsigned long  userData[4];    /* just use as a pointer */
 char          *muxName;
+char          *fcomName;
 
 int     feedback_mode;
 assign  feedback_mode  to "{MUX_NAME}:FBCK";
@@ -136,7 +137,10 @@ ss fcomPush
     state init
     {
         entry {
-            muxName = macValueGet("MUX_NAME");
+            muxName  = macValueGet("MUX_NAME");
+            fcomName = macValueGet("FCOM_NAME");
+            if(fcomName) muxName = fcomName;
+
             for(i=0; i<4; i++) {
                 userData[i] = initFcom(muxName, i);
             }
