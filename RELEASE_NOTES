@@ -1,5 +1,8 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-0: Dec 14, 2010 (KHKIM)
+    To support fcomUtil-R1-1-1
+
 pau-R1-3-0: Dec 14, 2010 (KHKIM)
     To avoid glitch when turn on the feedback mode
         - add up new SNL program: sncPauFcomPush
