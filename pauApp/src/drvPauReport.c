@@ -89,6 +89,10 @@ int drvPau_muxReport(mux_ts *pMux)
     epicsPrintf("    associated mux                    : %.8p", pMux->pAssociation);
     if(pAssociation) epicsPrintf("  mux(%s)\n", pAssociation->name);
     else epicsPrintf("\n");
+    epicsPrintf("    Callback ON function              : %.8p\n", pMux->pCbOnFunc);
+    epicsPrintf("    Callback OFF function             : %.8p\n", pMux->pCbOffFunc);
+    epicsPrintf("    Callback ON Usr data              : %.8p\n", pMux->pCbOnUsr);
+    epicsPrintf("    Callback OFF Usr data             : %.8p\n", pMux->pCbOffUsr);
     epicsPrintf("    spin time for pull function (usec): %.3lf\n", pMuxDebugInfo->spinTime_pullFunc_usec);
     epicsPrintf("    spin time for push function (usec): %.3lf\n", pMuxDebugInfo->spinTime_pushFunc_usec);
     epicsPrintf("    exec. counter for user pull func  : %d\n", pMuxDebugInfo->usrPullCounter);

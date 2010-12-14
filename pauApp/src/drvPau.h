@@ -33,6 +33,7 @@
 
 typedef void (*PAUQUEUEFUNC)(void*);
 typedef void (*PAUUSRFUNC)(void*,unsigned char);
+typedef void (*PAUCBFUNC) (void *);
 typedef void (*PAUFIDUCIALFUNC)(void*);
 
 typedef struct {
@@ -136,6 +137,10 @@ typedef struct {
     PAUUSRFUNC         pPushFunc;            /* user function to implement set value */
     void               *pPullUsr;
     void               *pPushUsr;
+    PAUCBFUNC          pCbOnFunc;            /* callback function for feedback ON */
+    PAUCBFUNC          pCbOffFunc;           /* callback function for feedback OFF */
+    void               *pCbOnUsr;
+    void               *pCbOffUsr;
     char               pullFuncName[32];
     char               pushFuncName[32];
     void               *pPau;                       /* pointer for PAU, who is my parent */

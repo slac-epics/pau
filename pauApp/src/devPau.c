@@ -641,6 +641,8 @@ static long devBoPau_write_bo(boRecord *precord)
     pau_ts    *pPau    = precPrv->pPau;
     mux_ts    *pMux;
 
+    unsigned char  fbckMode;
+
     switch(precPrv->commandIndex) {
         case activatePauType:
             epicsMutexLock(pPau->lockPau);
@@ -670,8 +672,14 @@ static long devBoPau_write_bo(boRecord *precord)
         case fbckModeMuxType:
             pMux = precPrv->pMux;
             epicsMutexLock(pMux->lockMux);
-                pMux->fbckMode = (precord->rval)?1:0;
-                if(pMux->fbckMode) updateFcomDataSlotFromStaticDataSlot(pMux, 0 /* don't need mutex lock */);
+                fbckMode = (precord->rval)?1:0;
+                if(fbckMode) { 
+                    updateFcomDataSlotFromStaticDataSlot(pMux, 0 /* don't need mutex lock */);
+                    if(pMux->pCbOnFunc) (*pMux->pCbOnFunc)(pMux->pCbOnUsr);
+                } else {
+                    if(pMux->pCbOffFunc) (*pMux->pCbOffFunc)(pMux->pCbOffUsr);
+                } 
+                pMux->fbckMode = fbckMode;
             epicsMutexUnlock(pMux->lockMux);
             break;
     }

@@ -1,5 +1,13 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-3-0: Dec 14, 2010 (KHKIM)
+    To avoid glitch when turn on the feedback mode
+        - add up new SNL program: sncPauFcomPush
+          . keep update fcomBlob with the static data slot during the feedback turned off
+        - add up user callback for the feedback turn on/off
+          . if the callback function pointer has non-NULL value, the device support will execute the callback function
+          . we don't need it right now, but in a future we can use it if we need
+
 pau-R1-2-0: Nov 3, 2010 (KHKIM)
     To support fcomUtil-R1-1-0
 

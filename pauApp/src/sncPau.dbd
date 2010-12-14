@@ -1,1 +1,2 @@
 registrar(sncPauRegistrar)
+registrar(sncPauFcomPushRegistrar)

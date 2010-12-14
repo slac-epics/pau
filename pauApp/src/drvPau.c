@@ -405,6 +405,11 @@ static int func_createMux(char *pauName, char *attribute, char *pushFuncName, ch
     pMux->pPullUsr = (void *) NULL;
     pMux->pPushUsr = (void *) NULL;
 
+    pMux->pCbOnFunc  = (PAUCBFUNC) NULL;
+    pMux->pCbOffFunc = (PAUCBFUNC) NULL;
+    pMux->pCbOnUsr   = (void *) NULL;
+    pMux->pCbOffUsr  = (void *) NULL;
+
     pMux->lockMux = epicsMutexCreate();
     pMux->pPau    = pPau;
     pMux->pAssociation = (void *) NULL;
