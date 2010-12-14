@@ -1,5 +1,12 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-1: Dec 14, 2010 (KHKIM)
+    Add up a new MACRO variable for sncPauFcomPush, if MUX has different name with the FCOM
+    ex) if MUX has same name with the FCOM
+        seq(&sncPauFcomPush, "MUX_NAME=<mux name>")
+        if MUX has different name with FCOM
+        seq(&sncPauFcomPush, "MUX_NAME=<mux name>, FCOM_NAME=<fcom name>")
+
 pau-R1-4-0: Dec 14, 2010 (KHKIM)
     To support fcomUtil-R1-1-1
 
