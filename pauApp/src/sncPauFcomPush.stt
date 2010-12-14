@@ -1,0 +1,188 @@
+program sncPauFcomPush
+option +r;
+
+%{
+#define FBCK_OFF  0
+#define FBCK_ON   1
+}%
+
+
+
+%{
+#include <cantProceed.h>
+#include <epicsTime.h>
+#include <epicsPrint.h>
+#include <drvPau.h>
+
+typedef struct {
+    char       fcomPVName[40];
+    FcomID     fcomId;
+    FcomBlob   *pBlob;
+    int        status;
+    double     pushVal;
+    unsigned   succCnt;
+    unsigned   failCnt;
+} usrData_ts;
+
+
+static usrData_ts * usrAllocate(char *mux_name)
+{
+      usrData_ts *pUsr  = (usrData_ts*) mallocMustSucceed(sizeof(usrData_ts), mux_name);
+      FcomBlob   *pBlob = (FcomBlob *)  mallocMustSucceed(sizeof(FcomBlob), mux_name);
+
+      if(pUsr && pBlob) {
+          pUsr->pBlob = pBlob;
+          return pUsr;
+      }
+      else return (usrData_ts *)NULL;
+}
+
+static unsigned long initFcom(char *mux_name, int slot)
+{
+    if(!mux_name) return 0;
+
+    usrData_ts *p = usrAllocate(mux_name);
+
+    if(!p) return 0;
+
+    p->status  = 0;
+    p->pushVal = 0.;
+    p->succCnt = 0;
+    p->failCnt = 0;
+
+    makeFcomPVNamewithSlotNumber(mux_name, p->fcomPVName, slot);
+    p->fcomId = fcomLCLSPV2FcomID(p->fcomPVName);
+
+
+    if(!p->fcomId) return 0;
+    else           return (unsigned long) p;
+}
+
+
+static void reportFcom(char *mux_name, unsigned long usrData)
+{
+    if(!usrData) return;
+
+    usrData_ts *p = (usrData_ts*) usrData;
+
+    epicsPrintf("\tsncPauFcomPush: mux (%s), fcomPV (%s), fcomID (0x%8x), pUsr (%8p), pBlob (%8p)\n",
+                 mux_name, p->fcomPVName, (unsigned int) p->fcomId, p, p->pBlob);
+    
+}
+
+
+static int pushFcom(unsigned long usrData, double value)
+{
+    if(!usrData) return -1;
+    
+    usrData_ts *pUsr  = (usrData_ts *) usrData;
+    FcomBlob   *pBlob = pUsr->pBlob;
+
+    epicsTimeStamp    timestamp;
+    
+    pUsr->pushVal = value;
+
+    epicsTimeGetCurrent(&timestamp); 
+
+    pBlob->fc_vers = FCOM_PROTO_VERSION;
+    pBlob->fc_tsHi = timestamp.secPastEpoch;
+    pBlob->fc_tsLo = timestamp.nsec;
+    pBlob->fc_stat = 0;
+    pBlob->fc_type = FCOM_EL_DOUBLE;
+    pBlob->fc_nelm = 1;
+    pBlob->fc_idnt = pUsr->fcomId;
+    pBlob->fc_dbl  = &pUsr->pushVal;
+
+    pUsr->status = fcomPutBlob(pBlob);
+
+
+    if(!pUsr->status) pUsr->succCnt++;
+    else              pUsr->failCnt++;
+
+    if(!pUsr->status) epicsPrintf("fcomPush (%s): %lf\n", pUsr->fcomPVName, pUsr->pushVal);
+
+    return pUsr->status;
+}
+
+
+}%
+
+int            i;
+unsigned long  userData[4];    /* just use as a pointer */
+char          *muxName;
+
+int     feedback_mode;
+assign  feedback_mode  to "{MUX_NAME}:FBCK";
+monitor feedback_mode;
+
+double  static_data[4];
+assign  static_data  to { "{MUX_NAME}:SETDATA_0",
+                          "{MUX_NAME}:SETDATA_1",
+                          "{MUX_NAME}:SETDATA_2",
+                          "{MUX_NAME}:SETDATA_3" };
+monitor static_data;
+
+evflag   ev_data0;
+sync     static_data[0]   ev_data0;
+evflag   ev_data1;
+sync     static_data[1]   ev_data1;
+evflag   ev_data2;
+sync     static_data[2]   ev_data2;
+evflag   ev_data3;
+sync     static_data[3]   ev_data3;
+
+
+ss fcomPush
+{
+
+    state init
+    {
+        entry {
+            muxName = macValueGet("MUX_NAME");
+            for(i=0; i<4; i++) {
+                userData[i] = initFcom(muxName, i);
+            }
+        }
+
+        when(delay(1.)) {
+        } state deactivate
+
+        exit {
+            for(i=0; i<4; i++) {
+                reportFcom(muxName, userData[i]);
+            }
+        }
+    }
+
+    state deactivate {
+        when(!feedback_mode) {} state activate     
+        /* when feedback mode turned off: need to push fcom data */
+    }
+
+    state activate
+    {
+        when(feedback_mode) {} state deactivate   
+        /* when feedback mode turned on: need to wait until the mode turned off */
+
+
+        when(efTestAndClear(ev_data0)) {
+            pushFcom(userData[0], static_data[0]);
+         } state activate 
+
+        when(efTestAndClear(ev_data1)) {
+            pushFcom(userData[1], static_data[1]);
+        } state activate
+
+        when(efTestAndClear(ev_data2)) {
+            pushFcom(userData[2], static_data[2]);
+        } state activate
+
+        when(efTestAndClear(ev_data3)) {
+            pushFcom(userData[3], static_data[3]);
+        } state activate
+
+    }
+}
+
+
+
