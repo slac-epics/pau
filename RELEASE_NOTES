@@ -1,5 +1,9 @@
 Release Notes for the PAU package
 ---------------------------------
+
+pau-R1-4-2: Feb 4, 2011 (KHKIM)
+    Fixing a bug on the backward propation (it only work when DS0 updated)    
+
 pau-R1-4-1: Dec 14, 2010 (KHKIM)
     Add up a new MACRO variable for sncPauFcomPush, if MUX has different name with the FCOM
     ex) if MUX has same name with the FCOM

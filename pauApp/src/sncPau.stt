@@ -33,8 +33,16 @@ assign    fcom          to { "{MUX_NAME}:GETFCOM_0",
                              "{MUX_NAME}:GETFCOM_2",
                              "{MUX_NAME}:GETFCOM_3" };
 monitor   fcom;
-evflag    ev_fcom;
-sync      fcom[0]   ev_fcom;
+
+evflag    ev_fcom_0;
+evflag    ev_fcom_1;
+evflag    ev_fcom_2;
+evflag    ev_fcom_3;
+
+sync      fcom[0]   ev_fcom_0;
+sync      fcom[1]   ev_fcom_1;
+sync      fcom[2]   ev_fcom_2;
+sync      fcom[3]   ev_fcom_3;
 
 double    master;
 assign    master        to "{MUX_NAME}";
@@ -50,15 +58,36 @@ ss bwProp
 {
     state calc_bwProp
     {
-        when(feedback_mode && efTestAndClear(ev_fcom)) {
+        when(feedback_mode && efTestAndClear(ev_fcom_0)) {
             master = fcom[0];
-            for(index = 0; index <4; index++) {
-                offset[index] = fcom[index] - master;
-                pvPut(offset[index]);
-            }
+            offset[0] = fcom[0] - master;
+            pvPut(offset[0]);
             pvPut(master);
         } state calc_bwProp
-    } 
+
+        when(feedback_mode && efTestAndClear(ev_fcom_1)) {
+            master = fcom[0];
+            offset[1] = fcom[1] - master;
+            pvPut(offset[1]);
+            pvPut(master);
+        } state calc_bwProp
+
+
+        when(feedback_mode && efTestAndClear(ev_fcom_2)) {
+            master = fcom[0];
+            offset[2] = fcom[2] - master;
+            pvPut(offset[2]);
+            pvPut(master);
+        } state calc_bwProp
+
+        when(feedback_mode && efTestAndClear(ev_fcom_3)) {
+            master = fcom[0];
+            offset[3] = fcom[3] - master;
+            pvPut(offset[3]);
+            pvPut(master);
+        } state calc_bwProp
+    }
+    
 }
 
 
