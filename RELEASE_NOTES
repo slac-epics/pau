@@ -1,5 +1,8 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-2-1: derived from the "pau-R1-4-2-BR" branch.  This was necessary due to dependencies
+              on udpComm. Did not want to build agaist the new udpComm as the API has changed.
+              This will be done later.
 
 pau-R1-4-2: Feb 4, 2011 (KHKIM)
     Fixing a bug on the backward propation (it only work when DS0 updated)    
