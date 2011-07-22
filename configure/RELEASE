@@ -28,11 +28,11 @@ EPICS_MODULES=$(MODULES_SITE_TOP)
 # IOC apps or other Support apps
 # =============================================================
 SEQ_MODULE_VERSION=seq-R2-0-11-lcls3
-EVENT_MODULE_VERSION=event-R3-2-1-br_backprop-1-0
+EVENT_MODULE_VERSION=event-R3-2-1-br_backprop-1-1
 GENERALTIME_MODULE_VERSION=generalTime-R2-2-0
 MISCUTILS_MODULE_VERSION=miscUtils-R2-2-0
-FCOM_MODULE_VERSION=fcom-R1-3-2-1
-FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-1-1
+FCOM_MODULE_VERSION=fcom-R1-3-2-2
+FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-1-2
 
 # ============================================================
 # External Support

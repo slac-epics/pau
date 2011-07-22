@@ -1,5 +1,9 @@
 Release Notes for the PAU package
 ---------------------------------
+
+
+pau-R1-4-2-2: Build with fcom-R1-3-2-2, and fcomUtil-R1-1-1-2
+
 pau-R1-4-2-1: derived from the "pau-R1-4-2-BR" branch.  This was necessary due to dependencies
               on udpComm. Did not want to build agaist the new udpComm as the API has changed.
               This will be done later.
