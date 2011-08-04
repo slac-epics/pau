@@ -1,52 +1,46 @@
-#RELEASE Location of external products
-# Run "gnumake clean uninstall install" in the application
-# top directory each time this file is changed.
+# "gnumake distclean install" in the top directory each time
+# EPICS_BASE, SNCSEQ, or any other external module defined
+# in the RELEASE file is rebuilt.
+#
+# Host/target specific settings can be specified in files named
+#  RELEASE.$(EPICS_HOST_ARCH).Common
+#  RELEASE.Common.$(T_A)
+#  RELEASE.$(EPICS_HOST_ARCH).$(T_A)
 
-# =============================================================
-# Define the top of the EPICS tree for your site.
-# We will build some tools/scripts that allow us to
-# change this easily when relocating software.
-# ==============================================================
+# Pickup the path to your EPICS top level directory
+# This is where EPICS lives at your site.
 include $(TOP)/RELEASE_SITE
-#EPICS_SITE_TOP=/afs/slac/g/lcls/epics
+
+
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
-# ==================================================================================
-# If using macro substitutions, point MSI at the binary:
-#EXTENSIONS_MODULE_VERSION=extensions-R3-14-8-2
-EXTENSIONS_MODULE_VERSION=extensions-R3-14-8-2
-MSI=$(EPICS_SITE_TOP)/extensions/$(EXTENSIONS_MODULE_VERSION)/bin/$(EPICS_HOST_ARCH)/msi
-# ==================================================================================
-
 # =============================================================
-# Define location of module tree with respect to
-# EPICS_SITE_TOP
+# Define location of module tree
 # =============================================================
-EPICS_MODULES=$(EPICS_SITE_TOP)/modules
+EPICS_MODULES=$(MODULES_SITE_TOP)
 
 # ==============================================================
 # Define the version of EPICS BASE that you will use
 # =============================================================
-#BASE_MODULE_VERSION=base-R3-14-8-2-lcls3
-BASE_MODULE_VERSION=base-R3-14-8-2-lcls6
+BASE_MODULE_VERSION=$(EPICS_BASE_VER)
+
+
 
 # =============================================================
 # Define the version of modules needed by
 # IOC apps or other Support apps
 # =============================================================
-SEQ_MODULE_VERSION=seq-R2-0-11-lcls3
-EVENT_MODULE_VERSION=event-R3-2-1
-GENERALTIME_MODULE_VERSION=generalTime-R2-2-0
-MISCUTILS_MODULE_VERSION=miscUtils-R2-2-0
-FCOM_MODULE_VERSION=fcom-R1-3-3
-FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-2
+SEQ_MODULE_VERSION=seq-R2-0-11-lcls4
+EVENT_MODULE_VERSION=event-R3-2-2-br_generaltime-1-1
+MISCUTILS_MODULE_VERSION=miscUtils-R2-2-2
+FCOM_MODULE_VERSION=fcom-R1-3-4
+FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-3
 
 # ============================================================
 # External Support
 # ============================================================
 SNCSEQ=$(EPICS_MODULES)/seq/$(SEQ_MODULE_VERSION)
 EVENT=$(EPICS_MODULES)/event/$(EVENT_MODULE_VERSION)
-GENERALTIME=$(EPICS_MODULES)/generalTime/$(GENERALTIME_MODULE_VERSION)
 MISCUTILS=$(EPICS_MODULES)/miscUtils/$(MISCUTILS_MODULE_VERSION)
 FCOM=$(EPICS_MODULES)/fcom/$(FCOM_MODULE_VERSION)
 FCOMUTIL=$(EPICS_MODULES)/fcomUtil/$(FCOMUTIL_MODULE_VERSION)
