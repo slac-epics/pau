@@ -722,7 +722,7 @@ static long devLongoutPau_init_record(longoutRecord *precord)
             }
             precPrv->pPau = findPau(option[1]);
             if(!precPrv->pPau) {
-                errlogPrintf("Rec(5s) could not find PAU (%s)\n", precord->name, option[1]);
+                errlogPrintf("Rec(%s) could not find PAU (%s)\n", precord->name, option[1]);
                 goto err2;
             }
             precPrv->dataslot_index = findIndex(idx_dataSlot, option[2]);
