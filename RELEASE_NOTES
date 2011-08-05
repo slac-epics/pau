@@ -1,12 +1,12 @@
 Release Notes for the PAU package
 ---------------------------------
 
-pau-R1-4-4: Aug 5, 2011 (KHKIM)
+pau-R1-4-5: Aug 5, 2011 (KHKIM)
     Rebuild with the follwing modules
          - fcom-R1-3-5
          - fcomUtil-R1-1-4
 
-pau-R1-4-3: Aug 4, 2011 (KHKIM)
+pau-R1-4-4: Aug 4, 2011 (KHKIM)
     Rebuild with the following module to support R3-14-12
           - seq-R2-0-11-lcls4
           - event-R3-2-2-br_generaltime-1-1
