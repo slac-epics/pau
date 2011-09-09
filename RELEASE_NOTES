@@ -1,6 +1,7 @@
 Release Notes for the PAU package
 ---------------------------------
 
+pau-R1-4-2-3: Build with fcom-R1-3-2-3, fcomUtil-R1-1-1-3, and event-R3-2-1-br_backprop-2-0
 
 pau-R1-4-2-2: Build with fcom-R1-3-2-2, and fcomUtil-R1-1-1-2
 
