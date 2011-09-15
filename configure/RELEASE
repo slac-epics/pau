@@ -34,7 +34,7 @@ BASE_MODULE_VERSION=base-R3-14-8-2-lcls6
 # Define the version of modules needed by
 # IOC apps or other Support apps
 # =============================================================
-SEQ_MODULE_VERSION=seq-R2-0-11-lcls3
+SEQ_MODULE_VERSION=seq-R2-0-11-lcls4
 EVENT_MODULE_VERSION=event-R3-2-1
 GENERALTIME_MODULE_VERSION=generalTime-R2-2-0
 MISCUTILS_MODULE_VERSION=miscUtils-R2-2-0
