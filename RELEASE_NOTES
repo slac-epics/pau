@@ -1,6 +1,10 @@
 Release Notes for the PAU package
 ---------------------------------
 
+pau-R1-4-3-BR: Sep 15, 2011 (KHKIM)
+    Branch Tag Anchor 
+    This branch is keeping epics base R3-14-8-2
+
 pau-R1-4-3: Jun 7, 2011 (KHKIM)
     Rebuild with
           - fcomUtil-R1-1-2
