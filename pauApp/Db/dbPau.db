@@ -138,16 +138,25 @@ record(bo, "$(PAU_REC):ACTDIAG")
     field(ONAM, "ON")
 }
 
-record(bo, "$(PAU_REC):FBCK")
-{
-    field(DTYP, "PAU")
-    field(OUT, "@setFeedbackMode $(PAU)")
-    field(OMSL, "supervisory")
-    field(PINI, "YES")
-    field(DESC, "Feedback mode for $(PAU)")
-    field(ZNAM, "OFF")
-    field(ONAM, "ON")
-}
+############################################
+#                                          #
+# The FBCK has been moved into MUX level   #
+#                                          #
+############################################
+#
+#record(bo, "$(PAU_REC):FBCK")
+#{
+#    field(DTYP, "PAU")
+#    field(OUT, "@setFeedbackMode $(PAU)")
+#    field(OMSL, "supervisory")
+#    field(PINI, "YES")
+#    field(DESC, "Feedback mode for $(PAU)")
+#    field(ZNAM, "OFF")
+#    field(ONAM, "ON")
+#}
+#
+#############################################
+#
 
 record(ao, "$(PAU_REC):PIPEIDX")
 {

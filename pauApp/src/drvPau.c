@@ -321,7 +321,7 @@ static int func_createPau(char *pauName, unsigned pipelineIdx, char *description
     pPau->activateUsrPull     = 1;
     pPau->activateUsrPush     = 1;
     pPau->activateDiag        = 1;
-    pPau->fbckMode            = 0;
+    pPau->fbckMode            = 0;   /* the FBCK has been moved into mux, nolonger use this */
     pPau->pFiducial           = pauFiducial;
     pPau->lockPau             = epicsMutexCreate();
     scanIoInit(&pPau->ioscanpvt);
@@ -697,6 +697,12 @@ char *getDevNameFromMux(mux_ts *pMux)
 }
 
 
+/**************************************
+ *
+ * The FBCK has been moved into MUX.
+ * Nolonger use, this......
+ *
+ **************************************/
 double getDataFromDataSlot(mux_ts *pMux)
 {
     pau_ts       *pPau           = pMux->pPau;

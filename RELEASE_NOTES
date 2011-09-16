@@ -1,6 +1,10 @@
 Release Notes for the PAU package
 ---------------------------------
 
+pau-R1-4-3-2: Sep 15, 2011 (KHKIM)
+    Remove FBCK PV from the pau object,
+    due to the FBCK has been moved into MUX level.
+
 pau-R1-4-3-1: Sep 15, 2011 (KHKIM)
     Rebuild with seq-R2-0-11-lcls4
 
