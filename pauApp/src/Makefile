@@ -15,12 +15,12 @@ SOURCE_DIR := $(patsubst %../.., %., $(TOP))
 
 include $(TOP)/configure/CONFIG
 
-CROSS_COMPILER_TARGET_ARCHS=RTEMS-beatnik
+#CROSS_COMPILER_TARGET_ARCHS=RTEMS-beatnik
 
 #----------------------------------------
 #  ADD MACRO DEFINITIONS AFTER THIS LINE
 
-BUILDFOR=_RTEMS
+#BUILDFOR=_RTEMS
 
 EVR_IOC_LIBS += evrSupport
 
@@ -28,7 +28,7 @@ EVR_IOC_LIBS += evrSupport
 # Build the IOC support library
 
 
-LIBRARY_IOC$(BUILDFOR) += pau
+LIBRARY_IOC = pau
 
 INC += drvPau.h  drvPauReport.h  drvPauTimer.h 
 

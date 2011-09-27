@@ -1,5 +1,9 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-6: Sept. 27, 2011 (Ernesto)
+            Rebuild with the follwing modules to support rt-linux
+         - fcom-R1-3-6
+         - fcomUtil-R1-1-5
 
 pau-R1-4-5: Aug 5, 2011 (KHKIM)
     Rebuild with the follwing modules
