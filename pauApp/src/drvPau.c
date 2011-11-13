@@ -226,6 +226,7 @@ static void pauFiducial(void *pArg)
     epicsTimeStamp     timestamp_advance;
     unsigned long      patternStatus_current;
     unsigned long      patternStatus_advance;
+    int                i;
 
 
     if(!pPau->activatePau)  return;
@@ -267,6 +268,12 @@ static void pauFiducial(void *pArg)
             pPau->current.matchedDataSlot = dataslot_current;
             pPau->current.usedFlag        = 0;
             pPau->current.patternStatus   = patternStatus_current;
+            for(i=0; i< MAX_EVR_MODIFIER; i++) {
+                pPau->current.modifier[i] = modifier_current[i];
+            }
+            if(modifier_current[MOD3_IDX] & POCKCEL_PERM) pPau->current.pockcel_perm = 1;
+            else                                          pPau->current.pockcel_perm = 0;
+
         } else dataslot_current = -1;
 
         if(matches_advance) {
@@ -277,6 +284,12 @@ static void pauFiducial(void *pArg)
             pPau->advance.matchedDataSlot = dataslot_advance;
             pPau->advance.usedFlag        = 0;
             pPau->advance.patternStatus   = patternStatus_advance;
+            for(i=0; i< MAX_EVR_MODIFIER; i++) {
+                pPau->advance.modifier[i] = modifier_advance[i];
+            }
+
+            if(modifier_advance[MOD3_IDX] & POCKCEL_PERM) pPau->advance.pockcel_perm = 1;
+            else                                          pPau->advance.pockcel_perm = 0;
 
             pPau->callbackCallCounter++;
         } else dataslot_advance = -1;

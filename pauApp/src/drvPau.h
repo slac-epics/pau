@@ -120,6 +120,8 @@ typedef struct {
     unsigned long      missingCounter;
     epicsRingBytesId   id_history;
     int                snapshot_history[360];
+    evrModifier_ta     modifier;
+    unsigned int       pockcel_perm;
 } patternMatches_ts;
 
 
