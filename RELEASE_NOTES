@@ -1,6 +1,11 @@
 Release Notes for the PAU package
 ---------------------------------
 
+pau-R1-4-2-5: Add new API for LLRF
+	              int setDataToFcomDataSlot_DSn(mux_ts *pMux, double data, unsigned slot)
+              This API is required to update all FCOM data slots every time.
+              We need this API only for the LLRF software.
+
 pau-R1-4-2-4: PAU data structure change for the LLRF application
               We need to clean up the Pockels Cell permit from PAU pattern, to get update FCOM data slot
               everytime event there is beam or not.
