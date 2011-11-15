@@ -760,6 +760,21 @@ int setDataToFcomDataSlot(mux_ts *pMux, double data)
     return 0;
 }
 
+int setDataToFcomDataSlot_DSn(mux_ts *pMux, double data, unsigned slot)
+{
+    pau_ts       *pPau           = pMux->pPau;
+    dataSlot_ts  *pdataSlot      = pMux->dataSlot + slot;
+
+    epicsMutexLock(pMux->lockMux);
+
+    pdataSlot->fcomData = data;
+
+    epicsMutexUnlock(pMux->lockMux);
+
+    return 0;
+
+}
+
 
 void updateFcomDataSlotFromStaticDataSlot(mux_ts *pMux, unsigned mutex_protection)
 {
