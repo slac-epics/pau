@@ -1,5 +1,12 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-7: Dec. 12, 2011 (Ernesto)
+            SEQ_MODULE_VERSION=seq-R2-1-3-lcls1
+            EVENT_MODULE_VERSION=event-R3-2-2-br_generaltime-1-3
+            MISCUTILS_MODULE_VERSION=miscUtils-R2-2-2
+            FCOM_MODULE_VERSION=fcom-R1-3-7
+            FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-6
+
 pau-R1-4-6: Sept. 27, 2011 (Ernesto)
             Rebuild with the follwing modules to support rt-linux
          - fcom-R1-3-6
