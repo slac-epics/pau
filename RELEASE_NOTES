@@ -1,6 +1,13 @@
 Release Notes for the PAU package
 ---------------------------------
 
+pau-R1-4-2-10: To support new Laser LLRF
+		Re-build against:
+                      event-R3-2-1-br_backprop-2-1
+                      udpComm-R2-1-6
+                      fcom-R1-3-8
+                      fcomUtil-R1-1-7
+
 pau-R1-4-2-5: Add new API for LLRF
 	              int setDataToFcomDataSlot_DSn(mux_ts *pMux, double data, unsigned slot)
               This API is required to update all FCOM data slots every time.

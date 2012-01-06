@@ -27,12 +27,12 @@ EPICS_MODULES=$(MODULES_SITE_TOP)
 # Define the version of modules needed by
 # IOC apps or other Support apps
 # =============================================================
-SEQ_MODULE_VERSION=seq-R2-0-11-lcls3
-EVENT_MODULE_VERSION=event-R3-2-1-br_backprop-2-0
-GENERALTIME_MODULE_VERSION=generalTime-R2-2-0
-MISCUTILS_MODULE_VERSION=miscUtils-R2-2-0
-FCOM_MODULE_VERSION=fcom-R1-3-2-3
-FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-1-3
+SEQ_MODULE_VERSION=seq-R2-1-3-lcls2
+EVENT_MODULE_VERSION=event-R3-2-1-br_backprop-2-1
+GENERALTIME_MODULE_VERSION=generalTime-R2-2-1
+MISCUTILS_MODULE_VERSION=miscUtils-R2-2-1
+FCOM_MODULE_VERSION=fcom-R1-3-8
+FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-7
 
 # ============================================================
 # External Support
