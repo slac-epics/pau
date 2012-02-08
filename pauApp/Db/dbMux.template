@@ -27,6 +27,6 @@ pattern {    MUX_REC ,     DS  }
 
 file db/dbMuxOffset.db
 {
-pattern { MUX_REC,  }
+pattern { MUX_REC   }
         { $(MUX_REC)}
 }
