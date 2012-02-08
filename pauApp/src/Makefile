@@ -23,7 +23,6 @@ CROSS_COMPILER_TARGET_ARCHS=RTEMS-beatnik
 BUILDFOR=_RTEMS
 
 EVR_IOC_LIBS += evrSupport
-EVR_IOC_LIBS += generalTime
 
 #=============================
 # Build the IOC support library
