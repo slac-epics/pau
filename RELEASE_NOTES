@@ -1,5 +1,14 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-2-11: Re-build against:
+                (support R3-14-12)
+		seq-R2-0-11-lcls4
+		event-R3-2-2-br_generaltime-1-3
+		udpComm-R2-1-5
+		miscUtils-R2-2-2
+		fcom-R1-3-7
+		fcomUtil-R1-1-6
+
 
 pau-R1-4-2-10: To support new Laser LLRF
 		Re-build against:
