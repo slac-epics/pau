@@ -120,6 +120,8 @@ typedef struct {
     unsigned long      missingCounter;
     epicsRingBytesId   id_history;
     int                snapshot_history[360];
+    evrModifier_ta     modifier;
+    unsigned int       pockcel_perm;
 } patternMatches_ts;
 
 
@@ -206,6 +208,7 @@ char *getDevNameFromMux(mux_ts *pMux);
 double getDataFromDataSlot(mux_ts *pMux);
 double getDataFromDataSlot_vMux(mux_ts *pMux);
 int setDataToFcomDataSlot(mux_ts *pMux, double data);
+int setDataToFcomDataSlot_DSn(mux_ts *pMux, double data, unsigned slot);
 void updateFcomDataSlotFromStaticDataSlot(mux_ts *pMux, unsigned mutex_protection);
 void updateStaticDataSlotFromFcomDataSlot(mux_ts *pMux, unsigned mutex_protection);
 
