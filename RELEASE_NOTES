@@ -1,5 +1,25 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-9: Aug. 17, 2012 (KHKIM)
+          - merge from pau-R1-4-2-5:
+              Add new API for LLRF
+                      int setDataToFcomDataSlot_DSn(mux_ts *pMux, double data, unsigned slot)
+              This API is required to update all FCOM data slots every time.
+              We need this API only for the LLRF software.
+
+          - merge from pau-R1-4-2-4:
+              PAU data structure change for the LLRF application
+              We need to clean up the Pockels Cell permit from PAU pattern, to get update FCOM data slot
+              everytime event there is beam or not.
+              We need to step down the Pockels Cell permit check into the usrPush function, this function requires
+              the advanced pattern (the evr modifier) to check up the permit.
+
+           - Build against
+                 event-R3-2-2-br_generaltime-2-4
+                 udpComm-R2-3-2
+                 fcom-R1-3-13
+                 fcomUtil-R1-1-13
+
 pau-R1-4-8: Apr. 19, 2012 (KHKIM)
              SEQ_MODULE_VERSION=seq-R2-1-6_1-0
              EVENT_MODULE_VERSION=event-R3-2-2-br_generaltime-2-2
