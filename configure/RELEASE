@@ -31,10 +31,10 @@ BASE_MODULE_VERSION=$(EPICS_BASE_VER)
 # IOC apps or other Support apps
 # =============================================================
 SEQ_MODULE_VERSION=seq-R2-1-6_1-0
-EVENT_MODULE_VERSION=event-R3-2-2-br_generaltime-2-4
+EVENT_MODULE_VERSION=event-R3-2-2-br_generaltime-2-6
 MISCUTILS_MODULE_VERSION=miscUtils-R2-2-2
-FCOM_MODULE_VERSION=fcom-R1-3-13
-FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-13
+FCOM_MODULE_VERSION=fcom-R1-3-14
+FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-14
 
 # ============================================================
 # External Support

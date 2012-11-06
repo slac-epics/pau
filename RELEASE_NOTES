@@ -1,5 +1,13 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-10: Nov. 6, 2012 (KHKIM)
+          - Build against
+               event-R3-2-2-br_generaltime-2-6
+               udpComm-R2-3-4
+               fcom-R1-3-14
+               fcomUtil-R1-1-14
+
+
 pau-R1-4-9: Aug. 17, 2012 (KHKIM)
           - merge from pau-R1-4-2-5:
               Add new API for LLRF
