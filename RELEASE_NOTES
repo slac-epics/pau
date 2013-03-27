@@ -1,6 +1,13 @@
 Release Notes for the PAU package
 ---------------------------------
-pau-R1-4-11: Mar. 18, 2012 (SCONDAM)
+pau-R1-4-12: Mar. 26, 2013 (KHKIM)
+          - Build against
+		event-R3-2-2-br_generaltime-4-0
+		udpComm-R2-4-2
+		fcom-R1-3-18
+		fcomUtil-R1-1-18
+ 
+pau-R1-4-11: Mar. 18, 2013 (SCONDAM)
           - Build against
                event-R3-2-2-br_generaltime-3-0
                udpComm-R2-4-1
