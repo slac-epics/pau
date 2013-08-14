@@ -1,6 +1,12 @@
 Release Notes for the PAU package
 ---------------------------------
-
+pau-R1-4-14: Aug. 14, 2013 (SCONDAM)
+          - Build against
+		event-R3-2-2-br_generaltime-4-0
+		udpComm-R2-5-1
+		fcom-R1-3-20
+		fcomUtil-R1-1-20
+		
 pau-R1-4-13: Aug. 14, 2013 (SCONDAM)
           - Build against
 		event-R3-2-2-br_generaltime-4-0
