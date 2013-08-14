@@ -33,8 +33,8 @@ BASE_MODULE_VERSION=$(EPICS_BASE_VER)
 SEQ_MODULE_VERSION=seq-R2-1-6_1-0
 EVENT_MODULE_VERSION=event-R3-2-2-br_generaltime-4-0
 MISCUTILS_MODULE_VERSION=miscUtils-R2-2-2
-FCOM_MODULE_VERSION=fcom-R1-3-18
-FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-18
+FCOM_MODULE_VERSION=fcom-R1-3-19
+FCOMUTIL_MODULE_VERSION=fcomUtil-R1-1-19
 
 # ============================================================
 # External Support
