@@ -1,5 +1,11 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-17: Feb. 28, 2014 (KHKIM)
+        - Build against
+               event-R4-1-0
+               fcom-R1-3-24
+               fcomUtil-R1-1-26
+
 pau-R1-4-16: Feb. 28, 2014 (SCONDAM)
           - Build against
 			event-R4-0-0
