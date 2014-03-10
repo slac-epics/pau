@@ -1,5 +1,13 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-18: Mar 13, 2014 (SCONDAM)
+        - Added autosaveFields to the following files:
+			M dbMux.db
+			M dbMuxOffset.db
+			M dbPau.db
+			M dbPauBeamcodeTimeslot.db
+			M dbPauPattern.db		
+
 pau-R1-4-17: Feb. 28, 2014 (KHKIM)
         - Build against
                event-R4-1-0

@@ -109,6 +109,7 @@ record(bo, "$(PAU_REC):ACTPAU")
     field(DESC, "Activate PAU for $(PAU)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
+    info(autosaveFields, "VAL")		
 }
 
 record(bo, "$(PAU_REC):ACTPULL")
@@ -147,6 +148,7 @@ record(bo, "$(PAU_REC):FBCK")
     field(DESC, "Feedback mode for $(PAU)")
     field(ZNAM, "OFF")
     field(ONAM, "ON")
+    info(autosaveFields, "VAL")		
 }
 
 record(ao, "$(PAU_REC):PIPEIDX")
@@ -159,6 +161,7 @@ record(ao, "$(PAU_REC):PIPEIDX")
     field(DRVH, "3")
     field(DESC, "EVR pipeline index for $(PAU)")
     field(PREC, "0")
+    info(autosaveFields, "VAL")		
 }
 
 record(ao, "$(PAU_REC):DELAY")
@@ -172,4 +175,5 @@ record(ao, "$(PAU_REC):DELAY")
     field(DESC, "Timer delay for $(PAU)")
     field(EGU, "micro-sec")
     field(PREC, "3")
+    info(autosaveFields, "VAL")		
 }

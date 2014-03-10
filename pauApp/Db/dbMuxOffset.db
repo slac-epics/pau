@@ -5,6 +5,7 @@ record(ao, "$(MUX_REC)")
     field(FLNK, "$(MUX_REC):FANOUT0")
     field(PREC, "3")
     field(PINI, "YES")
+    info(autosaveFields, "VAL")		
 }
 
 ## data slot 0 ##
@@ -16,6 +17,7 @@ record(ao, "$(MUX_REC):OFFSET_0")
     field(PREC, "3")
     field(FLNK, "$(MUX_REC):CALCOUT_0")
     field(PINI, "YES")
+    info(autosaveFields, "VAL")		
 }
 
 record(calcout, "$(MUX_REC):CALCOUT_0")
@@ -36,6 +38,7 @@ record(ao, "$(MUX_REC):OFFSET_1")
     field(PREC, "3")
     field(FLNK, "$(MUX_REC):CALCOUT_1")
     field(PINI, "YES")
+    info(autosaveFields, "VAL")		
 }
 
 record(calcout, "$(MUX_REC):CALCOUT_1")
@@ -57,6 +60,7 @@ record(ao, "$(MUX_REC):OFFSET_2")
     field(PREC, "3")
     field(FLNK, "$(MUX_REC):CALCOUT_2")
     field(PINI, "YES")
+    info(autosaveFields, "VAL")		
 }
 
 record(calcout, "$(MUX_REC):CALCOUT_2")
@@ -77,6 +81,7 @@ record(ao, "$(MUX_REC):OFFSET_3")
     field(PREC, "3")
     field(FLNK, "$(MUX_REC):CALCOUT_3")
     field(PINI, "YES")
+    info(autosaveFields, "VAL")		
 }
 
 record(calcout, "$(MUX_REC):CALCOUT_3")

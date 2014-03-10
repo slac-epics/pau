@@ -70,5 +70,6 @@ record(bo, "$(MUX_REC):FBCK")
     field(ONAM, "ON")
     field(VAL, "1")
     field(PINI, "YES")
+    info(autosaveFields, "VAL")		
 }
 
