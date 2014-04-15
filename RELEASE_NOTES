@@ -1,5 +1,12 @@
 Release Notes for the PAU package
 ---------------------------------
+
+pau-R1-4-19: Apr. 15, 2014 (LUCHINI)
+        - Build against
+               event-R4-1-1
+               fcom-R1-3-25
+               fcomUtil-R1-1-27
+
 pau-R1-4-18: Mar 13, 2014 (SCONDAM)
         - Added autosaveFields to the following files:
 			M dbMux.db
