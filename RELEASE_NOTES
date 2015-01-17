@@ -3,6 +3,7 @@ Release Notes for the PAU package
 
 pau-R1-4-20: Jan. 16, 2015 (KIM)
         - Build against
+               seq-R2-1-6_1-3
                event-R4-1-5
                fcom-R1-3-27
                fcomUtil-R1-1-30
