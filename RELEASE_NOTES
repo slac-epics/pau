@@ -1,5 +1,11 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-22: Jun. 10, 2016 (SCONDAM)
+        - Build against
+               event-R4-2-3
+               fcom-R1-3-33
+               fcomUtil-R1-1-36
+			   
 pau-R1-4-21: Feb. 19, 2015 (SCONDAM)
         - Build against
                event-R4-1-6
