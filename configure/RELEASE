@@ -24,8 +24,6 @@ EPICS_MODULES=$(MODULES_SITE_TOP)
 # =============================================================
 BASE_MODULE_VERSION=$(EPICS_BASE_VER)
 
-
-
 # =============================================================
 # Define the version of modules needed by
 # IOC apps or other Support apps

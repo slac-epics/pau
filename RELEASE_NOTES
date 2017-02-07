@@ -1,5 +1,11 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-24: Feb. 6, 2017 (ernesto)
+           - Build against
+               event-R4-2-5
+               fcom-R1-3-35
+               fcomUtil-R1-2-3
+
 pau-R1-4-23: July. 13, 2016 (CAROLINA)
         - Build against
                event-R4-2-5
