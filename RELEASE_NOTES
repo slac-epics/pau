@@ -1,6 +1,7 @@
 Release Notes for the PAU package
 ---------------------------------
 R1.5.2:      Nov. 13, 2018 (KHKIM)
+             - add accurate tming mwasureing MFTB()
              - build with
                seq         R2.2.4-1.0
                timingApi   R0.6
