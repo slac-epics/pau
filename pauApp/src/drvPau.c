@@ -19,6 +19,8 @@
 #include "drvPauReport.h"
 #include "drvPauTimer.h"
 
+#include "MFTB.h"
+
 
 #define  PAUQUEUE_SIZE   1024
 #define  INIT_USRFUNC    1
@@ -78,7 +80,7 @@ static void queueToUhcb(void *pVar)
     pau_ts          *pPau       = pQueueComp->parg;
     pauDebugInfo_ts *pPauDebugInfo = pPau->pPauDebugInfo;
 
-    CPU_Get_timebase_low(pPauDebugInfo->tick_cnt_timerIsr);
+    MFTB(pPauDebugInfo->tick_cnt_timerIsr);
 
     epicsMessageQueueSend(pauQueue, pQueueComp, sizeof(pauQueueComp_ts));
 }
@@ -93,7 +95,7 @@ static void pauDiag(void *pArg)
 
     uint32_t     start, end;
 
-    CPU_Get_timebase_low(start);
+    MFTB(start);
     pPauDebugInfo->tick_cnt_diagFunc = start;
 
     epicsMutexLock(pPau->lockPau);
@@ -130,7 +132,7 @@ static void pauDiag(void *pArg)
     }
 
 
-    CPU_Get_timebase_low(end);
+    MFTB(end);
 
     epicsMutexLock(pPau->lockPau);
     pPauDebugInfo->spinTime_fiduFunc_usec
@@ -151,28 +153,28 @@ static void pauProcessing(void *pArg)
     mux_ts          *pMux;
     muxDebugInfo_ts *pMuxDebugInfo;
 
-    CPU_Get_timebase_low(pPauDebugInfo->tick_cnt_pullFunc);
+    MFTB(pPauDebugInfo->tick_cnt_pullFunc);
 
     pMux = (mux_ts *) ellFirst(&pPau->muxList);
     while(pMux) {
         pMuxDebugInfo = pMux->pMuxDebugInfo;
 
-        CPU_Get_timebase_low(pMuxDebugInfo->tick_cnt_pullStart);
+        MFTB(pMuxDebugInfo->tick_cnt_pullStart);
         if(pMux->pPullFunc) (*pMux->pPullFunc)((void *) pMux, PROC_USRFUNC);
-        CPU_Get_timebase_low(pMuxDebugInfo->tick_cnt_pullEnd);
+        MFTB(pMuxDebugInfo->tick_cnt_pullEnd);
 
         pMux = (mux_ts *) ellNext(&pMux->node);
     }
 
-    CPU_Get_timebase_low(pPauDebugInfo->tick_cnt_pushFunc);
+    MFTB(pPauDebugInfo->tick_cnt_pushFunc);
 
     pMux = (mux_ts *) ellFirst(&pPau->muxList);
     while(pMux) {
         pMuxDebugInfo = pMux->pMuxDebugInfo;
 
-        CPU_Get_timebase_low(pMuxDebugInfo->tick_cnt_pushStart);
+        MFTB(pMuxDebugInfo->tick_cnt_pushStart);
         if(pMux->pPushFunc) (*pMux->pPushFunc)((void *) pMux, PROC_USRFUNC);
-        CPU_Get_timebase_low(pMuxDebugInfo->tick_cnt_pushEnd);
+        MFTB(pMuxDebugInfo->tick_cnt_pushEnd);
 
         pMux = (mux_ts *) ellNext(&pMux->node);
     }
@@ -201,9 +203,9 @@ static void pauOnceInit(void)
                       (EPICSTHREADFUNC) uhcbPau, 0);
 
     while(time_start >= time_end) {
-        CPU_Get_timebase_low(time_start);
+        MFTB(time_start);
         epicsThreadSleep(1.);
-        CPU_Get_timebase_low(time_end);
+        MFTB(time_end);
     }
     clock_ticks_insec = time_end - time_start;
     
@@ -232,7 +234,7 @@ static void pauFiducial(void *pArg)
     if(!pPau->activatePau)  return;
 
   
-    CPU_Get_timebase_low(pPauDebugInfo->tick_cnt_begin);
+    MFTB(pPauDebugInfo->tick_cnt_begin);
  
    
     evrTimeGetFromPipeline(&timestamp_current, evrTimeCurrent, modifier_current, &patternStatus_current,0,0,0); 
@@ -305,7 +307,7 @@ static void pauFiducial(void *pArg)
     epicsMutexUnlock(pPau->lockPau);
 
 
-    CPU_Get_timebase_low(pPauDebugInfo->tick_cnt_fiducial);
+    MFTB(pPauDebugInfo->tick_cnt_fiducial);
 
     if(matches_advance) {
         if(pPau->pPauTimer && (pPau->delay_in_usec > 0.))  pauTimerStart(pPau->pPauTimer, pPau->delay_in_usec);
