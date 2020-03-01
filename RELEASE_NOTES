@@ -1,5 +1,15 @@
 Release Notes for the PAU package
 ---------------------------------
+
+R1.5.5:      Mar 1, 2020 (KHKIM)
+             - build with
+               seq        R2.2.4-1.0
+               timingApi  R0.6
+               event      R4.5.1
+               miscUtil   R2.2.5
+               fcom       R1.9.21
+               fcomUtil   R1.9.21
+
 R1.5.4:      Sep. 11, 2019 (KHKIM)
              - build with
                seq        R2.2.4-1.0
