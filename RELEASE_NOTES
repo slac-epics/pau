@@ -1,5 +1,19 @@
 Release Notes for the PAU package
 ---------------------------------
+
+R1.7.0:     Mar 10, 2020 (KHKIM)
+            - support evrClient
+            - change macro EVENT to EVRCLIENT
+            - build with
+              evrClient R1.5.0
+              fcom R1.9.24
+              fcomUtil R1.9.24
+
+support_evrClient: Mar 10, 2020 (KHKIM)
+----------------------------------------------
+branched out from R1.6.0 to support evrClient
+----------------------------------------------
+
 R1.6.0:      Mar 10, 2020 (KHKIM)
              - support event module
              - build with
