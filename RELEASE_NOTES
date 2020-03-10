@@ -1,5 +1,16 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-24-BR-1 Kukhee Kim
+          - build with
+               event-R4-2-5-CLTS-R3
+               fcom-R1-3-35-BR-1
+               fcomUtil-R1-2-4-BR-1
+
+pau-R1-4-24-BR    Kukhee Kim
+--------------------------
+branch out from pau-R1-4-24
+---------------------------
+
 pau-R1-4-24: Feb. 6, 2017 (ernesto)
            - Build for linuxRT targets and against
                event-R4-2-5
