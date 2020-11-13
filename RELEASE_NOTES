@@ -1,5 +1,9 @@
 Release Notes for the PAU package
 ---------------------------------
+
+R1.7.0       Nov 13, 2020 (KHKIM)
+             - support multiple desitnation (second master set value)
+
 R1.6.0:      Mar 10, 2020 (KHKIM)
              - support event module
              - build with

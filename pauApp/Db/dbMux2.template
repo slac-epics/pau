@@ -1,0 +1,32 @@
+file db/dbMux.db
+{
+pattern {   MUX_REC  }
+        { $(MUX_REC) }
+}
+
+file db/dbMuxDataSlot.db
+{
+pattern {    MUX_REC ,     DS  }
+        {  $(MUX_REC),      0  }
+        {  $(MUX_REC),      1  }
+        {  $(MUX_REC),      2  }
+        {  $(MUX_REC),      3  }
+        {  $(MUX_REC),      4  }
+        {  $(MUX_REC),      5  }
+        {  $(MUX_REC),      6  }
+        {  $(MUX_REC),      7  }
+        {  $(MUX_REC),      8  }
+        {  $(MUX_REC),      9  }
+        {  $(MUX_REC),      A  }
+        {  $(MUX_REC),      B  }
+        {  $(MUX_REC),      C  }
+        {  $(MUX_REC),      D  }
+        {  $(MUX_REC),      E  }
+        {  $(MUX_REC),      F  }
+}
+
+file db/dbMuxOffset2.db
+{
+pattern { MUX_REC  }
+        { $(MUX_REC)}
+}
