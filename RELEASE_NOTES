@@ -1,5 +1,8 @@
 Release Notes for the PAU package
 ---------------------------------
+pau-R1-4-24-BR-1  Kukhee Kim
+          - add 2nd master PV for dual destinations
+
 pau-R1-4-24-BR-1 Kukhee Kim
           - build with
                event-R4-2-5-CLTS-R3

@@ -1,0 +1,139 @@
+record(ao, "$(MUX_REC)")
+{
+    field(DTYP, "Soft Channel")
+    field(DESC, "1st Master SetValue")
+    field(FLNK, "$(MUX_REC):FANOUT0")
+    field(PREC, "3")
+    field(PINI, "YES")
+    info(autosaveFields, "VAL")		
+}
+
+record(ao, "$(MUX_REC)2")
+{
+    field(DTYP, "Soft Channel")
+    field(DESC, "2nd Master SetValue")
+    field(FLNK, "$(MUX_REC):FANOUT02")
+    field(PREC, "3")
+    field(PINI, "YES")
+    info(autosaveFields, "VAL")		
+}
+
+
+## data slot 0 for 1st master ##
+
+record(ao, "$(MUX_REC):OFFSET_0")
+{
+    field(DTYP, "Soft Channel")
+    field(DESC, "Offset for DS0")
+    field(PREC, "3")
+    field(FLNK, "$(MUX_REC):CALCOUT_0")
+    field(PINI, "YES")
+    info(autosaveFields, "VAL")		
+}
+
+record(calcout, "$(MUX_REC):CALCOUT_0")
+{
+    field(DESC, "Calcout for DS0")
+    field(CALC, "A+B")
+    field(INPA, "$(MUX_REC) NPP NMS")
+    field(INPB, "$(MUX_REC):OFFSET_0 NPP NMS")
+    field(OUT, "$(MUX_REC):SETDATA_0 PP NMS")
+}
+
+## data slot 1 for 2nd master ##
+
+record(ao, "$(MUX_REC):OFFSET_1")
+{
+    field(DTYP, "Soft Channel")
+    field(DESC, "Offset for DS1")
+    field(PREC, "3")
+    field(FLNK, "$(MUX_REC):CALCOUT_1")
+    field(PINI, "YES")
+    info(autosaveFields, "VAL")		
+}
+
+record(calcout, "$(MUX_REC):CALCOUT_1")
+{
+    field(DESC, "Calcout for DS1")
+    field(CALC, "A+B")
+    field(INPA, "$(MUX_REC)2 NPP NMS")
+    field(INPB, "$(MUX_REC):OFFSET_1 NPP NMS")
+    field(OUT, "$(MUX_REC):SETDATA_1 PP NMS")
+}
+
+
+## data slot 2 for 2nd master ##
+
+record(ao, "$(MUX_REC):OFFSET_2")
+{
+    field(DTYP, "Soft Channel")
+    field(DESC, "Offset for DS2")
+    field(PREC, "3")
+    field(FLNK, "$(MUX_REC):CALCOUT_2")
+    field(PINI, "YES")
+    info(autosaveFields, "VAL")		
+}
+
+record(calcout, "$(MUX_REC):CALCOUT_2")
+{
+    field(DESC, "Calcout for DS2")
+    field(CALC, "A+B")
+    field(INPA, "$(MUX_REC)2 NPP NMS")
+    field(INPB, "$(MUX_REC):OFFSET_2 NPP NMS")
+    field(OUT, "$(MUX_REC):SETDATA_2 PP NMS")
+}
+
+## data slot 3 for 1st master ##
+
+record(ao, "$(MUX_REC):OFFSET_3")
+{
+    field(DTYP, "Soft Channel")
+    field(DESC, "Offset for DS3")
+    field(PREC, "3")
+    field(FLNK, "$(MUX_REC):CALCOUT_3")
+    field(PINI, "YES")
+    info(autosaveFields, "VAL")		
+}
+
+record(calcout, "$(MUX_REC):CALCOUT_3")
+{
+    field(DESC, "Calcout for DS3")
+    field(CALC, "A+B")
+    field(INPA, "$(MUX_REC) NPP NMS")
+    field(INPB, "$(MUX_REC):OFFSET_3 NPP NMS")
+    field(OUT, "$(MUX_REC):SETDATA_3 PP NMS")
+}
+
+## fanout for 1st master ##
+
+record(fanout, "$(MUX_REC):FANOUT0")
+{
+    field(DESC, "MUX fanout 0")
+    field(LNK1, "$(MUX_REC):CALCOUT_0")
+    field(LNK2, "$(MUX_REC):CALCOUT_3")
+    field(FLNK, "$(MUX_REC):FANOUT1")
+}
+
+record(fanout, "$(MUX_REC):FANOUT1")
+{
+    field(DESC, "MUX fanout 1")
+}
+
+
+## fanout for 2nd master ##
+
+record(fanout, "$(MUX_REC):FANOUT02")
+{
+    field(DESC, "MUX fanout 02")
+    field(LNK1, "$(MUX_REC):CALCOUT_1")
+    field(LNK2, "$(MUX_REC):CALCOUT_2")
+    field(FLNK, "$(MUX_REC):FANOUT12")
+}
+
+record(fanout, "$(MUX_REC):FANOUT12")
+{
+    field(DESC, "MUX fanout 12")
+}
+
+
+
