@@ -21,10 +21,10 @@
 # ==========================================================
 SEQ_MODULE_VERSION=R2.2.4-1.0
 TIMINGAPI_MODULE_VERSION=R0.6
-EVENT_MODULE_VERSION=R4.5.1
+EVENT_MODULE_VERSION=R4.5.3
 MISCUTILS_MODULE_VERSION=R2.2.5
-FCOM_MODULE_VERSION=R1.9.21
-FCOMUTIL_MODULE_VERSION=R1.9.23
+FCOM_MODULE_VERSION=R1.9.25
+FCOMUTIL_MODULE_VERSION=R1.9.25
 
 # ==========================================================
 # Define module paths using pattern
