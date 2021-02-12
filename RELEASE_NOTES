@@ -1,5 +1,18 @@
 Release Notes for the PAU package
 ---------------------------------
+
+R1.7.2      Feb 2, 2021 (KHKIM)
+             - build with 
+               seq        R2.2.4-1.0
+               timingApi  R0.6
+               (BSaCore   R1.5.4)
+               event      R4.5.5
+               miscUtil   R2.2.5
+               (udpComm   R2.11.17)   - support event module
+               fcom       R1.9.26     - support event module
+               fcomUtil   R1.9.26     - support event module
+
+
 R1.7.1       Dec 10, 2020 (KHKIM)
              - build with 
                seq        R2.2.4-1.0
