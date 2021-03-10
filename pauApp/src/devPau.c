@@ -63,6 +63,7 @@ typedef enum {
     activateDiagType,     /* to activate diag function, default is activated */
     fbckModeType,       /* to turn ON/OFF the global feedback mode for the pau*/ 
     fbckModeMuxType,    /* to turn ON/OFF the global feedback mode for each mux */
+    fbckModeMuxType2,   /* feedback mode for 2nd group (for dual destination) */
     pipIdxType,     /* to put pipeline index */
     delayType,      /* to put timer delay */
     setDataType,    /* to put static data into data slot */
@@ -102,6 +103,7 @@ static stringIndex_ts idx_setInfo[] = { {"setActivatePau",     activatePauType},
                                         {"setActivateDiag",    activateDiagType},     /* BO record (for pau): @setActiateDiag      pau_name */
                                         {"setFeedbackMode",    fbckModeType},         /* BO record (for pau): @setFeedbackMode     pau_name */
                                         {"setFeedbackModeMux", fbckModeMuxType},      /* BO record (for mux): @setFeedbackModeMux */
+                                        {"setFeedbackModeMux2", fbckModeMuxType2},    /* BO record (for mux): @setFeedbackModeMux2 */
                                         {"setPipIdx",          pipIdxType},           /* AO record (for pau): @setPipInx           pau_name */
                                         {"setDelay",           delayType},            /* AO record (for pau): @setDelay            pau_name */
                                         {"setstaticData",      setDataType},          /* AO record (for data slot): @setstaticData ds[0-F] */
@@ -603,7 +605,8 @@ static long devBoPau_init_record(boRecord *precord)
             }
             break;
 
-        case fbckModeMuxType:    /* syntax: @setFeedbackModeMux */
+        case fbckModeMuxType ... fbckModeMuxType2:    /* syntax: @setFeedbackModeMux,
+                                                                 @setFeedbackModeMux2  */
             if(i<1) {
                 goto err2;
             }
@@ -614,6 +617,7 @@ static long devBoPau_init_record(boRecord *precord)
                 goto err2;
             }
             precPrv->pPau = precPrv->pMux->pPau;
+            if(precPrv->commandIndex == fbckModeMuxType2) precPrv->pMux->op_mode = 1;   /* mux operation for dual destinations */
             break;
 
 
@@ -674,12 +678,27 @@ static long devBoPau_write_bo(boRecord *precord)
             epicsMutexLock(pMux->lockMux);
                 fbckMode = (precord->rval)?1:0;
                 if(fbckMode) { 
-                    updateFcomDataSlotFromStaticDataSlot(pMux, 0 /* don't need mutex lock */);
+                    if(!pMux->op_mode) updateFcomDataSlotFromStaticDataSlot(pMux, 0 /* don't need mutex lock */);            /* backward compatible */
+                    else               updateFcomDataSlotFromStaticDataSlotForGangA(pMux, 0 /* don't need mutex lock */);    /* for dual detination, Gang A */
                     if(pMux->pCbOnFunc) (*pMux->pCbOnFunc)(pMux->pCbOnUsr);
                 } else {
                     if(pMux->pCbOffFunc) (*pMux->pCbOffFunc)(pMux->pCbOffUsr);
                 } 
                 pMux->fbckMode = fbckMode;
+                if(!pMux->op_mode) pMux->fbckMode2 = fbckMode;   /* for the backward compatible */
+            epicsMutexUnlock(pMux->lockMux);
+            break;
+        case fbckModeMuxType2:
+            pMux = precPrv->pMux;
+            epicsMutexLock(pMux->lockMux);
+                fbckMode = (precord->rval)?1:0;
+                if(fbckMode) {
+                    updateFcomDataSlotFromStaticDataSlotForGangB(pMux, 0 /* don't need mutex lock */); /* for dual destination, Gang B */
+                    if(pMux->pCbOnFunc) (*pMux->pCbOnFunc)(pMux->pCbOnUsr); 
+                } else {
+                    if(pMux->pCbOffFunc) (*pMux->pCbOffFunc)(pMux->pCbOffUsr);
+                }
+                pMux->fbckMode2 = fbckMode;   /* for dual destinatio mode */
             epicsMutexUnlock(pMux->lockMux);
             break;
     }
