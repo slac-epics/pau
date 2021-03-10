@@ -1,4 +1,4 @@
-file db/dbMux.db
+file db/dbMux2.db
 {
 pattern {   MUX_REC  }
         { $(MUX_REC) }
