@@ -130,6 +130,4 @@ ss iocAdmin
             if(admin2 == ADMIN_UNAVAILABLE) { feedback_mode2 = FBCK_OFF; pvPut(feedback_mode2); }
         } state check_mode
     }
-    }
-
 }
