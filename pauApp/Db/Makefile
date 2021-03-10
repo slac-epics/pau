@@ -3,6 +3,7 @@ include $(TOP)/configure/CONFIG
 
 DB += dbPau.db
 DB += dbMux.db
+DB += dbMux2.db
 DB += dbPauPattern.db
 DB += dbPauBeamcodeTimeslot.db
 DB += dbMuxDataSlot.db

@@ -1,0 +1,88 @@
+record(ai, "$(MUX_REC):PULLCNT")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "Passive")
+    field(INP,  "@getUsrPullCnt")
+    field(DESC, "Usr Pull Exec Counter")
+    field(EGU,  "Counts")
+    field(PREC, "0")
+}
+
+record(calc, "$(MUX_REC):PULLRATE")
+{
+    field(SCAN, "2 second")
+    field(CALC, "(C-B)<0.?A:(C-B)/2.")
+    field(INPA, "$(MUX_REC):PULLRATE.VAL NPP NMS")
+    field(INPB, "$(MUX_REC):PULLCNT.VAL NPP NMS")
+    field(INPC, "$(MUX_REC):PULLCNT.VAL PP NMS")
+    field(DESC, "Usr Pull Exec Rate")
+    field(PREC, "2")
+}
+
+record(ai, "$(MUX_REC):PUSHCNT")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "Passive")
+    field(INP, "@getUsrPushCnt")
+    field(DESC, "Usr Push Exec Counter")
+    field(EGU, "Counts")
+    field(PREC, "0")
+}
+
+record(calc, "$(MUX_REC):PUSHRATE")
+{
+    field(SCAN, "2 second")
+    field(CALC, "(C-B)<0.?A:(C-B)/2.")
+    field(INPA, "$(MUX_REC):PUSHRATE.VAL NPP NMS")
+    field(INPB, "$(MUX_REC):PUSHCNT.VAL NPP NMS")
+    field(INPC, "$(MUX_REC):PUSHCNT.VAL PP NMS")
+    field(DESC, "Usr Push Exec Rate")
+    field(PREC, "2")
+}
+
+record(ai, "$(MUX_REC):SPNPULL")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getSpnUsrPull")
+    field(DESC, "spin time for usr pull")
+    field(EGU, "micro-sec")
+    field(PREC, "3")
+}
+
+record(ai, "$(MUX_REC):SPNPUSH")
+{
+    field(DTYP, "PAU")
+    field(SCAN, "1 second")
+    field(INP, "@getSpnUsrPush")
+    field(DESC, "spin time for usr push")
+    field(EGU, "micro-sec")
+    field(PREC, "3")
+}
+
+
+record(bo, "$(MUX_REC):FBCK")
+{
+    field(DTYP, "PAU")
+    field(OUT, "@setFeedbackModeMux")
+    field(DESC, "Set Feedback mode")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(VAL, "1")
+    field(PINI, "YES")
+    info(autosaveFields, "VAL")		
+}
+
+
+record(bo, "$(MUX_REC):FBCK2")
+{
+    field(DTYP, "PAU")
+    field(OUT, "@setFeedbackModeMux2")
+    field(DESC, "Set Feedback mode for Gang2")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(VAL, "1")
+    field(PINI, "YES")
+    info(autosaveFields, "VAL")		
+}
+
