@@ -22,6 +22,11 @@ int       feedback_mode;
 assign    feedback_mode  to "{MUX_NAME}:FBCK";
 monitor   feedback_mode;
 
+int       feedback_mode2;
+assign    feedback_mode2  to "{MUX_NAME}:FBCK2";
+monitor   feedback_mode2;
+
+
 double    offset[4];
 assign    offset         to { "{MUX_NAME}:OFFSET_0",
                               "{MUX_NAME}:OFFSET_1",
@@ -59,6 +64,13 @@ evflag    ev_admin;
 sync      admin    ev_admin;
 
 
+int       admin2;
+assign    admin2   to  "{ADMIN_NAME2}";
+monitor   admin2;
+evflag    ev_admin2;
+sync      admin2    ev_admin2;
+
+
 ss bwProp
 {
     state calc_bwProp
@@ -70,7 +82,7 @@ ss bwProp
             pvPut(master);
         } state calc_bwProp
 
-        when(feedback_mode && efTestAndClear(ev_fcom_1)) {   /* for 2nd master */
+        when(feedback_mode2 && efTestAndClear(ev_fcom_1)) {   /* for 2nd master */
             master2 = fcom[1];  /* make ds1 as a master data slot for the 2nd master */
             offset[1] = fcom[1] - master2;
             pvPut(offset[1]);
@@ -78,7 +90,7 @@ ss bwProp
         } state calc_bwProp
 
 
-        when(feedback_mode && efTestAndClear(ev_fcom_2)) {   /* for 2nd master */
+        when(feedback_mode2 && efTestAndClear(ev_fcom_2)) {   /* for 2nd master */
             master2 = fcom[1];  /* make ds1 as a master data slot for the 2nd master */
             offset[2] = fcom[2] - master2;
             pvPut(offset[2]);
@@ -100,27 +112,24 @@ ss iocAdmin
 {
     state init
     {
-        when(admin == ADMIN_UNAVAILABLE) {
-            admin = ADMIN_OFF;
-            pvPut(admin);
-        } state check_mode
-
        when(1) {
        } state check_mode
     }
 
     state check_mode
     {
-        when(1) {
+        when(efTestAndClear(ev_admin)) {
             if(admin == ADMIN_OFF)         { feedback_mode = FBCK_OFF; pvPut(feedback_mode); }
             if(admin == ADMIN_ON)          { feedback_mode = FBCK_ON;  pvPut(feedback_mode); }
             if(admin == ADMIN_UNAVAILABLE) { feedback_mode = FBCK_OFF; pvPut(feedback_mode); }
-        } state wait_admin
-    }
+        } state check_mode
 
-    state wait_admin
-    {
-        when(efTestAndClear(ev_admin)) {
+        when(efTestAndClear(ev_admin2)) {
+            if(admin2 == ADMIN_OFF)         { feedback_mode2 = FBCK_OFF; pvPut(feedback_mode2); }
+            if(admin2 == ADMIN_ON)          { feedback_mode2 = FBCK_ON;  pvPut(feedback_mode2); }
+            if(admin2 == ADMIN_UNAVAILABLE) { feedback_mode2 = FBCK_OFF; pvPut(feedback_mode2); }
         } state check_mode
     }
+    }
+
 }
