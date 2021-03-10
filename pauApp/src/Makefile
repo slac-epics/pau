@@ -47,6 +47,7 @@ pau_SRCS += drvPauUsr.c
 pau_SRCS += sncPau.stt
 pau_SRCS += sncPau2.stt
 pau_SRCS += sncPauFcomPush.stt
+pau_SRCS += sncPauFcomPush2.stt
 
 pau_DBD += drvPau.dbd
 pau_DBD += devPau.dbd
