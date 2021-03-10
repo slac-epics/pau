@@ -147,6 +147,8 @@ typedef struct {
     char               pushFuncName[32];
     void               *pPau;                       /* pointer for PAU, who is my parent */
     unsigned char      fbckMode;                    /* feedback mode */
+    unsigned char      fbckMode2;                   /* feedback mode for 2nd group */
+    unsigned char      op_mode;                     /* mux operation mode - 0: single group (single destination), 1: dual destination*/
     IOSCANPVT          ioscanpvt;                   /* IO SCAN for the mux */
     void               *pAssociation;
     dataSlot_ts        dataSlot[MAXNUM_DATASLOTS];   /* data slots */
@@ -210,6 +212,8 @@ double getDataFromDataSlot_vMux(mux_ts *pMux);
 int setDataToFcomDataSlot(mux_ts *pMux, double data);
 int setDataToFcomDataSlot_DSn(mux_ts *pMux, double data, unsigned slot);
 void updateFcomDataSlotFromStaticDataSlot(mux_ts *pMux, unsigned mutex_protection);
+void updateFcomDataSlotFromStaticDataSlotForGangA(mux_ts *pMux, unsigned mutex_protection);
+void updateFcomDataSlotFromStaticDataSlotForGangB(mux_ts *pMux, unsigned mutex_protection);
 void updateStaticDataSlotFromFcomDataSlot(mux_ts *pMux, unsigned mutex_protection);
 
 int  makeFcomPVNamewithSlotNumber(const char *muxName, const char *fcomPVName, int slot_number);
