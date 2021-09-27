@@ -1,5 +1,10 @@
 Release Notes for the PAU package
 ---------------------------------
+R1.8.1      Sep 28, 2021 (LUCHINI):
+            - with
+               seq        R2.2.4-1.2
+               fcom       R1.9.27     - support event module
+               fcomUtil   R1.9.27     - support event module
 
 R1.8.0      Mar 9, 2021 (KHKIM)
             - separate feedback PVs in the Mux for dual destination
