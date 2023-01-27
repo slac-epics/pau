@@ -21,10 +21,13 @@
 # ==========================================================
 SEQ_MODULE_VERSION=R2.2.4-1.2
 TIMINGAPI_MODULE_VERSION=R0.6
-EVENT_MODULE_VERSION=R4.5.5
+EVENT_MODULE_VERSION=R4.8.4
 MISCUTILS_MODULE_VERSION=R2.2.5
-FCOM_MODULE_VERSION=R1.9.26
-FCOMUTIL_MODULE_VERSION=R1.9.26
+
+# Feedback support
+#(built for event support)
+FCOM_MODULE_VERSION=R1.9.31
+FCOMUTIL_MODULE_VERSION=R1.9.31
 
 # ==========================================================
 # Define module paths using pattern
@@ -33,7 +36,6 @@ FCOMUTIL_MODULE_VERSION=R1.9.26
 # FOO = /Full/Path/To/Development/Version 
 # ==========================================================
 SNCSEQ=$(EPICS_MODULES)/seq/$(SEQ_MODULE_VERSION)
-#BSACORE=$(EPICS_MODULES)/BsaCore/$(BSACORE_MODULE_VERSION)
 TIMINGAPI=$(EPICS_MODULES)/timingApi/$(TIMINGAPI_MODULE_VERSION)
 EVENT=$(EPICS_MODULES)/event/$(EVENT_MODULE_VERSION)
 MISCUTILS=$(EPICS_MODULES)/miscUtils/$(MISCUTILS_MODULE_VERSION)

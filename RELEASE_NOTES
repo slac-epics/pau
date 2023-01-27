@@ -1,5 +1,11 @@
 Release Notes for the PAU package
 ---------------------------------
+R1.8.2      Jan 27, 2023 (LUCHINI):
+            - upgrade RELEASE.local modules to
+               event       R4.8.4  
+               fcom        R1.9.31
+               fcomUtil    R1.8.31
+
 R1.8.1      Sep 28, 2021 (LUCHINI):
             - with
                seq        R2.2.4-1.2
