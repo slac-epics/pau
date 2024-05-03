@@ -5,7 +5,7 @@
 #include <epicsThread.h>
 
 #include <evrTime.h>
-#include <evrPattern.h>
+#include <eventPattern.h>
 
 #include "drvPau.h"
 #include "drvPauReport.h"

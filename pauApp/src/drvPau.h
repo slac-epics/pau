@@ -12,7 +12,7 @@
 #include <fcomUtil.h>
 
 #include <evrTime.h>
-#include <evrPattern.h>
+#include <eventPattern.h>
 #include <drvPauTimer.h>
 
 #define PAU_FCOM_OK              0

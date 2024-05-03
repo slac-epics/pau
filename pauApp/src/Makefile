@@ -22,7 +22,7 @@ include $(TOP)/configure/CONFIG
 
 #BUILDFOR=_RTEMS
 
-EVR_IOC_LIBS += evrSupport
+EVR_IOC_LIBS += eventSupport
 
 #=============================
 # Build the IOC support library
