@@ -52,7 +52,7 @@ typedef struct {
 } pauDataPullFunc_ts;
 
 
-ELLLIST pauDataPullFuncList_s;
+extern ELLLIST pauDataPullFuncList_s;
 
 
 /* Data Push function */

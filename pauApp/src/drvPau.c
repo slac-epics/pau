@@ -33,7 +33,7 @@ static epicsMessageQueueId   pauQueue;
 static ELLLIST pauList_s;
 static uint32_t              clock_ticks_insec = 133333333/4;  /* mv6100 default,
                                                                  it will be updated during driver init. */
-
+ELLLIST pauDataPullFuncList_s;
 
 static int pauReport();
 struct drvet drvPau = {
