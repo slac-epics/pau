@@ -1,5 +1,10 @@
 Release Notes for the PAU package
 ---------------------------------
+R1.8.4      Oct 14, 2024 (LORELLI):
+            - Upgrade RELEASE.local modules to
+               fcom R1.9.33
+               fcomUtil R1.9.33
+
 R1.8.3      May 03, 2024 (LORELLI):
             - upgrade RELEASE.local modules to
                event       R4.9.0
