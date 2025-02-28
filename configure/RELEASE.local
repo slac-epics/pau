@@ -20,8 +20,8 @@
 # could match a directory name.
 # ==========================================================
 SEQ_MODULE_VERSION=R2.2.4-1.2
-TIMINGAPI_MODULE_VERSION=R0.6
-EVENT_MODULE_VERSION=R4.9.0
+TIMINGAPI_MODULE_VERSION=R0.9
+EVENT_MODULE_VERSION=R4.9.2
 MISCUTILS_MODULE_VERSION=R2.2.5
 
 # Feedback support
