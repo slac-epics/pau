@@ -26,8 +26,8 @@ MISCUTILS_MODULE_VERSION=R2.2.5
 
 # Feedback support
 #(built for event support)
-FCOM_MODULE_VERSION=R1.9.33
-FCOMUTIL_MODULE_VERSION=R1.9.33
+FCOM_MODULE_VERSION=R1.9.34
+FCOMUTIL_MODULE_VERSION=R1.9.34
 
 # ==========================================================
 # Define module paths using pattern
