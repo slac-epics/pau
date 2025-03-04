@@ -1,5 +1,10 @@
 Release Notes for the PAU package
 ---------------------------------
+R1.8.6      Mar 03, 2025 (LORELLI)
+            - Upgrade RELEASE.local modules to
+                fcom R1.9.34
+                fcomUtil R1.9.34
+
 R1.8.5      Feb 27, 2025 (LORELLI)
             - Upgrade RELEASE.local modules to
                 timingApi 0.9
