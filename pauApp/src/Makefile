@@ -54,7 +54,7 @@ pau_DBD += devPau.dbd
 pau_DBD += drvPauUsr.dbd
 pau_DBD += sncPau.dbd
 
-pau_LIBS += $(EVR_IOC_LIBS)
+#pau_LIBS += $(EVR_IOC_LIBS)
 pau_LIBS += seq pv
 
 

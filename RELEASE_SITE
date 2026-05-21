@@ -10,10 +10,11 @@
 #==============================================================================
 EPICS_SITE_TOP=/afs/slac/g/lcls/epics
 BASE_SITE_TOP=/afs/slac/g/lcls/epics/base
-MODULES_SITE_TOP=/afs/slac/g/lcls/epics/modules/R3-14-12
+MODULES_SITE_TOP=/afs/slac/g/lcls/epics/R3-14-12/modules
 IOC_SITE_TOP=/afs/slac/g/lcls/epics/iocTop
 EPICS_BASE_VER=base-R3-14-12
 PACKAGE_SITE_TOP=/afs/slac/g/lcls/package
+MATLAB_PACKAGE_TOP=/afs/slac/g/lcls/package/matlab
 TOOLS_SITE_TOP=/afs/slac/g/lcls/tools
 ALARM_CONFIGS_TOP=/afs/slac/g/lcls/tools/AlarmConfigsTop
 #==============================================================================
