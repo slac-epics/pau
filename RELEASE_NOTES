@@ -1,6 +1,9 @@
 Release Notes for the PAU package
 -------------------------------0
 
+pau-R1-4-24-BR-4  Kukhee Kim
+          build against fcom-R1-3-35-BR-2 and fcomUtil R1.2.4-1.4.0
+
 pau-R1-4-24-BR-3  Kukhee Kim
           - implement a separate feedback PV in the mux for dual destinations
           - mostly equvalient with R1.8.0
