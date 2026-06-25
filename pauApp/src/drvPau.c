@@ -80,9 +80,13 @@ static void queueToUhcb(void *pVar)
     pau_ts          *pPau       = pQueueComp->parg;
     pauDebugInfo_ts *pPauDebugInfo = pPau->pPauDebugInfo;
 
-    MFTB(pPauDebugInfo->tick_cnt_timerIsr);
-
-    epicsMessageQueueSend(pauQueue, pQueueComp, sizeof(pauQueueComp_ts));
+    if(pPau->currentMatchValid) {
+        MFTB(pPauDebugInfo->tick_cnt_timerIsr);
+ 
+        epicsMessageQueueSend(pauQueue, pQueueComp, sizeof(pauQueueComp_ts));
+    } else {
+        if(pPau->current.timestamp.secPastEpoch) pPau->currentMatchValid = -1;
+    }
 }
 
 
@@ -321,7 +325,7 @@ static void pauFiducial(void *pArg)
 static int func_createPau(char *pauName, unsigned pipelineIdx, char *description)
 {
     int    i;
-    pau_ts *pPau = (pau_ts *) malloc(sizeof(pau_ts));
+    pau_ts *pPau = (pau_ts *) calloc(1, sizeof(pau_ts));
     if(!pPau) {
         errlogPrintf("createPau(%s): memory allocation fail.\n", pauName);
         return -1;
@@ -329,6 +333,7 @@ static int func_createPau(char *pauName, unsigned pipelineIdx, char *description
 
     strcpy(pPau->name, pauName); strcpy(pPau->description, description);
 
+    pPau->currentMatchValid   = 0;
     pPau->fiducialCounter     = 0;
     pPau->callbackCallCounter = 0;
     pPau->pipelineIdx         = pipelineIdx;

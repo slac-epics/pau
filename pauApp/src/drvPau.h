@@ -179,7 +179,8 @@ typedef struct {
     pattern_ts         patternData[MAXNUM_DATASLOTS]; /* pre-defined matched patterns for each data slots */ 
     patternMatches_ts  current;
     patternMatches_ts  advance;
-    epicsTimeStamp     timestamp;           
+    epicsTimeStamp     timestamp;          
+    int                currentMatchValid;            /* flag for sending queue */ 
     ELLLIST            muxList;                      /* linked list for muxes in the pau */
 } pau_ts;
 
