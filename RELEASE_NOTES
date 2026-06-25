@@ -1,6 +1,13 @@
 Release Notes for the PAU package
 -------------------------------
 
+pau-R1-4-24-BR-6 Kukhee Kim
+           - fallback to old fcom/fcomUtil
+           - build against:
+               . fcom-R1-3-35-BR-1
+               . fcomUtil-R1-2-4-BR-1
+             
+
 pau-R1-4-24-BR-5  Kukhee Kim
            - PAU startup-order fix
            - add currentMatchValid flag to start PAU in a good window
