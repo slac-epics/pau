@@ -1,5 +1,35 @@
 Release Notes for the PAU package
--------------------------------0
+-------------------------------
+
+pau-R1-4-24-BR-5  Kukhee Kim
+           - PAU startup-order fix
+           - add currentMatchValid flag to start PAU in a good window
+
+
+                                         Good window: 2 fiducials
+                                               +---------+
+
+   TS4   TS5   TS6  . . . . . . . . . . .  TS1   TS2   TS3   TS4   TS5
+ --+-----+-----+-------------------------+-----+-----+-----+-----+--->  fiducial time
+   ^                                            ^           ^
+   |                                            |           |
+   |                                            |           |
+ Previous current match               Advanced match    Current match
+
+   |____________________________________________|
+                 Bad window: 34 fiducials
+
+   |<------------------------------------------------------->|
+                  36 fiducials in one 10 Hz cycle
+                  
+Conceptual timing diagram for the corner case after IOC reboot with no active rate.
+For a 10 Hz rate, the matched pulse occurs once every 36 fiducials.
+The advanced match occurs two fiducials before the current match.
+If the rate is started in the narrow two-fiducial window (good window) between the advanced match 
+and the current match, PAU can latch a valid current matching state before the next advanced match. 
+Otherwise, PAU may process an advanced match before any valid current matching state exists.
+
+
 
 pau-R1-4-24-BR-4  Kukhee Kim
           build against fcom-R1-3-35-BR-2 and fcomUtil R1.2.4-1.4.0
